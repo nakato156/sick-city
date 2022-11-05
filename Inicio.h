@@ -33,7 +33,7 @@ namespace TrabajoFinal {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			int cantidad = 7 + rand() % 20 - 7;
+			int cantidad = 7 + rand() % 10 - 7;
 			g_contagiado->agregaContagiados(cantidad);
 		}
 
@@ -117,6 +117,7 @@ namespace TrabajoFinal {
 		buffer->Graphics->DrawImage(pictureBox1->Image, 0, 0,ancho, alto);
 		enfermero->mueveEnfermero(buffer, mapa_enfermero);
 		g_contagiado->moverContagiados(buffer, mapa_contagiados);
+		
 		buffer->Render(canvaFormulario);
 		delete buffer;
 		delete canvaFormulario;
