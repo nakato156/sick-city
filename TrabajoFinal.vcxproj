@@ -120,10 +120,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Enfermero.cpp" />
     <ClCompile Include="Inicio.cpp" />
     <ClCompile Include="Mochila.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Enfermero.h" />
+    <ClInclude Include="Enfermo.h" />
+    <ClInclude Include="GestorEnfermo.h" />
     <ClInclude Include="Personaje.h" />
     <ClInclude Include="Inicio.h">
       <FileType>CppForm</FileType>
