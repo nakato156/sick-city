@@ -1,16 +1,15 @@
 #include "Inicio.h"
-<<<<<<< HEAD
+//#include "screenGameOver.h"
+
 using namespace std;
 using namespace System;
 using namespace TrabajoFinal;
+
 int main()
 {
-	srand(time(NULL));
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
+	//Application::Run(gcnew TrabajoFinal::screenGameOver());
 	Application::Run(gcnew TrabajoFinal::Inicio());
 	return 0;
 }
-=======
-
->>>>>>> cristina

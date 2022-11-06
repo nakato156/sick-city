@@ -120,24 +120,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Contagiado.cpp" />
     <ClCompile Include="Enfermero.cpp" />
+    <ClCompile Include="GestorContagiado.cpp" />
     <ClCompile Include="Inicio.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="Mochila.cpp" />
+    <ClCompile Include="screenGameOver.cpp" />
+    <ClCompile Include="selecModoJuego.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constantes.h" />
     <ClInclude Include="Enfermero.h" />
     <ClInclude Include="Enfermo.h" />
     <ClInclude Include="GestorEnfermo.h" />
-    <ClInclude Include="Personaje.h" />
     <ClInclude Include="Inicio.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="screenGameOver.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Personaje.h" />
+    <ClInclude Include="Level1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Item.h" />
     <ClInclude Include="Mochila.h" />
+    <ClInclude Include="selecModoJuego.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Inicio.resx">
       <DependentUpon>Inicio.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Level1.es-PE.resx">
+      <DependentUpon>Level1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Level1.resx">
+      <DependentUpon>Level1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="screenGameOver.resx">
+      <DependentUpon>screenGameOver.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="selecModoJuego.resx">
+      <DependentUpon>selecModoJuego.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
