@@ -15,12 +15,12 @@ namespace TrabajoFinal {
 	public ref class selecModoJuego : public System::Windows::Forms::Form
 	{
 	private:
-		//System::String name;
+		System::String^ name;
 	public:
-		selecModoJuego(void)
+		selecModoJuego(System::String^ name_)
 		{
+			name = name_;
 			InitializeComponent();
-			//name = name_;
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -67,11 +67,9 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->msgBienvenida->Location = System::Drawing::Point(53, 45);
 			this->msgBienvenida->Name = L"msgBienvenida";
-			this->msgBienvenida->Size = System::Drawing::Size(120, 21);
+			this->msgBienvenida->Size = System::Drawing::Size(131, 21);
 			this->msgBienvenida->TabIndex = 0;
-			this->msgBienvenida->Text = L"Bienvenido ";
-			//this->msgBienvenida->Text += name.ToString();
-			this->msgBienvenida->Text += ", escoja su modo de juego!";
+			this->msgBienvenida->Text = L"Bienvenido " + name + ", escoja el modo de juego!";
 			// 
 			// label1
 			// 
@@ -80,9 +78,9 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(160, 264);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(78, 18);
+			this->label1->Size = System::Drawing::Size(108, 18);
 			this->label1->TabIndex = 1;
-			this->label1->Text = L"Nivel 1";
+			this->label1->Text = L"Un jugador";
 			// 
 			// label2
 			// 
@@ -91,9 +89,9 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->label2->Location = System::Drawing::Point(510, 264);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(78, 18);
+			this->label2->Size = System::Drawing::Size(128, 18);
 			this->label2->TabIndex = 2;
-			this->label2->Text = L"Nivel 2";
+			this->label2->Text = L"Multijugador";
 			// 
 			// selecModoJuego
 			// 

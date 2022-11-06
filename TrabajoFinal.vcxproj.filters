@@ -33,9 +33,6 @@
     <ClCompile Include="GestorContagiado.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
-    <ClCompile Include="Inicio.cpp">
-      <Filter>Archivos de origen</Filter>
-    </ClCompile>
     <ClCompile Include="selecModoJuego.cpp">
       <Filter>Archivos de encabezado</Filter>
     </ClCompile>

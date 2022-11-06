@@ -1,4 +1,5 @@
 #pragma once
+#include "selecModoJuego.h"
 
 namespace TrabajoFinal {
 
@@ -21,11 +22,6 @@ namespace TrabajoFinal {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-<<<<<<< HEAD
-			int cantidad = 7 + rand() % 10 - 7;
-			g_contagiado->agregaContagiados(cantidad);
-=======
->>>>>>> cristina
 		}
 	private: System::Windows::Forms::TextBox^ txtInputName;
 	public:
@@ -82,6 +78,7 @@ namespace TrabajoFinal {
 			this->label1->Size = System::Drawing::Size(197, 21);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Ingrese su nombre";
+			this->leftMsg = this->label1->Left - 100;
 			// 
 			// Inicio
 			// 
@@ -99,27 +96,9 @@ namespace TrabajoFinal {
 	private: System::Void Inicio_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		checkName(e);
 	}
-<<<<<<< HEAD
-	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-		Graphics^ canvaFormulario = this->CreateGraphics();
-		BufferedGraphicsContext^ espacio = BufferedGraphicsManager::Current;
-		BufferedGraphics^ buffer = espacio->Allocate(canvaFormulario, this->ClientRectangle);
-		buffer->Graphics->Clear(Color::White);
-		
-		int ancho = buffer->Graphics->VisibleClipBounds.Width;
-		int alto = buffer->Graphics->VisibleClipBounds.Height;
-		buffer->Graphics->DrawImage(pictureBox1->Image, 0, 0,ancho, alto);
-		enfermero->mueveEnfermero(buffer, mapa_enfermero);
-		g_contagiado->moverContagiados(buffer, mapa_contagiados);
-		
-		buffer->Render(canvaFormulario);
-		delete buffer;
-		delete canvaFormulario;
-		delete espacio;
-=======
+
 	private: System::Void txtInputName_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
 		checkName(e);
->>>>>>> cristina
 	}
 
 private: System::Void textInputName_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
@@ -152,9 +131,14 @@ private: System::Void textInputName_KeyPress(System::Object^ sender, System::Win
 	   }
 	   void checkName(System::Windows::Forms::KeyPressEventArgs^ e) {
 		   if (e->KeyChar == '\r') {
-			   if (this->txtInputName->Text->Trim()->Empty) {
+			   if (this->txtInputName->Text->Trim() == "") {
 				   this->label1->Left = leftMsg;
 				   this->label1->Text = "Por favor ingrese su nombre para continuar";
+			   }
+			   else {
+				   System::String^ name = System::Convert::ToString(this->txtInputName->Text);
+				   selecModoJuego^ VModoJuego = gcnew TrabajoFinal::selecModoJuego(name);
+				   VModoJuego->ShowDialog();
 			   }
 		   }
 	   }
