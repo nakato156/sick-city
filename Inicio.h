@@ -1,9 +1,5 @@
 #pragma once
-#include <iostream>
-#include "Personaje.h"
-#include "Enfermero.h"
-#include "Enfermo.h"
-#include "GestorEnfermo.h"
+
 namespace TrabajoFinal {
 
 	using namespace System;
@@ -18,14 +14,6 @@ namespace TrabajoFinal {
 	/// </summary>
 	public ref class Inicio : public System::Windows::Forms::Form
 	{
-	private:
-		Enfermero* enfermero = new Enfermero(10, 300, 2);
-		GesContagiado* g_contagiado = new GesContagiado();
-		Bitmap^ mapa_contagiados = gcnew Bitmap("abeja.png");
-	private: System::Windows::Forms::Timer^ timer1;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
-		   //DEFINIR RUTA DEL SPRITE
-		Bitmap^ mapa_enfermero = gcnew Bitmap("hulk.png");
 	public:
 		Inicio(void)
 		{
@@ -33,14 +21,15 @@ namespace TrabajoFinal {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			int cantidad = 7 + rand() % 20 - 7;
-			g_contagiado->agregaContagiados(cantidad);
 		}
+	private: System::Windows::Forms::TextBox^ txtInputName;
+	public:
 
 	protected:
 		/// <summary>
 		/// Limpiar los recursos que se estén usando.
 		/// </summary>
+		int leftMsg;
 		~Inicio()
 		{
 			if (components)
@@ -48,14 +37,14 @@ namespace TrabajoFinal {
 				delete components;
 			}
 		}
-	private: System::ComponentModel::IContainer^ components;
 	protected:
+	private: System::Windows::Forms::Label^ label1;
 
 	private:
 		/// <summary>
 		/// Variable del diseñador necesaria.
 		/// </summary>
-
+		System::ComponentModel::Container ^components;
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -64,82 +53,90 @@ namespace TrabajoFinal {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = (gcnew System::ComponentModel::Container());
-			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Inicio::typeid));
-			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->txtInputName = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
-			// timer1
+			// txtInputName
 			// 
-			this->timer1->Enabled = true;
-			this->timer1->Tick += gcnew System::EventHandler(this, &Inicio::timer1_Tick);
+			this->txtInputName->Font = (gcnew System::Drawing::Font(L"Courier New", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->txtInputName->Location = System::Drawing::Point(357, 223);
+			this->txtInputName->Name = L"txtInputName";
+			this->txtInputName->Size = System::Drawing::Size(197, 29);
+			this->txtInputName->TabIndex = 0;
+			this->txtInputName->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Inicio::textInputName_KeyPress);
 			// 
-			// pictureBox1
+			// label1
 			// 
-			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(599, 247);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(100, 50);
-			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
-			this->pictureBox1->TabIndex = 0;
-			this->pictureBox1->TabStop = false;
-			this->pictureBox1->Visible = false;
+			this->label1->AutoSize = true;
+			this->label1->Font = (gcnew System::Drawing::Font(L"Courier New", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->label1->Location = System::Drawing::Point(357, 255);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(197, 21);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"Ingrese su nombre";
 			// 
 			// Inicio
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
-			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1313, 605);
-			this->Controls->Add(this->pictureBox1);
-			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->ClientSize = System::Drawing::Size(875, 393);
+			this->Controls->Add(this->label1);
+			this->Controls->Add(this->txtInputName);
 			this->Name = L"Inicio";
-			this->Text = L"Inicio";
-			this->Load += gcnew System::EventHandler(this, &Inicio::Inicio_Load);
-			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Inicio::Inicio_KeyDown);
-			this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &Inicio::Inicio_KeyUp);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Inicio::Inicio_Paint_1);
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
-	private: System::Void Inicio_Load(System::Object^ sender, System::EventArgs^ e) {
+	
+	private: System::Void Inicio_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		checkName(e);
 	}
-	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-		Graphics^ canvaFormulario = this->CreateGraphics();
-		BufferedGraphicsContext^ espacio = BufferedGraphicsManager::Current;
-		BufferedGraphics^ buffer = espacio->Allocate(canvaFormulario, this->ClientRectangle);
-		buffer->Graphics->Clear(Color::White);
-		
-		int ancho = buffer->Graphics->VisibleClipBounds.Width;
-		int alto = buffer->Graphics->VisibleClipBounds.Height;
-		buffer->Graphics->DrawImage(pictureBox1->Image, 0, 0,ancho, alto);
-		enfermero->mueveEnfermero(buffer, mapa_enfermero);
-		g_contagiado->moverContagiados(buffer, mapa_contagiados);
-		buffer->Render(canvaFormulario);
-		delete buffer;
-		delete canvaFormulario;
-		delete espacio;
+	private: System::Void txtInputName_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+		checkName(e);
 	}
-	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
-		switch (e->KeyCode) {
-		case Keys::Left:
-			enfermero->setDireccion(Izquierda);
-			break;
-		case Keys::Right:
-			enfermero->setDireccion(Derecha);
-			break;
-		case Keys::Up:
-			enfermero->setDireccion(Arriba);
-			break;
-		case Keys::Down:
-			enfermero->setDireccion(Abajo);
-			break;
-		}
-	}
-	private: System::Void Inicio_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
-		enfermero->setDireccion(Ninguna);
-	}
-	};
+
+private: System::Void textInputName_KeyPress(System::Object^ sender, System::Windows::Forms::KeyPressEventArgs^ e) {
+	checkName(e);
+}
+	   void dibujarTrazado(PaintEventArgs^ e) {
+		   System::Drawing::Drawing2D::GraphicsPath^ trazado = gcnew System::Drawing::Drawing2D::GraphicsPath;
+		   int ancho = this->ClientSize.Width;
+		   int mitad = ancho / 2;
+		   trazado->AddEllipse(mitad - 170, 0, 200, 100);
+		   array<Point>^ u = { Point(mitad - 120, 30),	Point(mitad - 120, 70),	Point(mitad - 100,70),	Point(mitad - 100, 30) };
+		   array<Point>^ p = { Point(mitad - 80,40),	Point(mitad - 60,40),	Point(mitad - 60,30),	Point(mitad - 80, 30),	Point(mitad - 80,70) };
+		   array<Point>^ c = { Point(mitad - 20,30),	Point(mitad - 40,30),	Point(mitad - 40,70),	Point(mitad - 20, 70) };
+		   trazado->AddLines(u);
+		   trazado->AddLines(p);
+		   trazado->AddLines(c);
+		   System::Drawing::Drawing2D::Matrix^ matriz = gcnew System::Drawing::Drawing2D::Matrix;
+		   //crea un matriz para hacer el movimiento de todos los puntos a una nuevaposicion X,Y
+		   matriz->Translate(100, 100);
+		   trazado->Transform(matriz);
+		   // Crear lapicero
+		   // Dibuja el trazado de dibujo en la pantalla.
+		   e->Graphics->DrawPath(Pens::Black, trazado);
+		   //Disfuncionales
+		   Graphics^ canva = this->CreateGraphics();
+		   Drawing::Font^ tipoLetra = gcnew Drawing::Font("Times New Roman", 42);
+		   //canva->Clear(Color::White);						color de fondo
+		   canva->DrawString("Los Disfuncionales", tipoLetra, Brushes::Red, (ancho / 3) - 50, 7);
+
+	   }
+	   void checkName(System::Windows::Forms::KeyPressEventArgs^ e) {
+		   if (e->KeyChar == '\r') {
+			   if (this->txtInputName->Text->Trim()->Empty) {
+				   this->label1->Left = leftMsg;
+				   this->label1->Text = "Por favor ingrese su nombre para continuar";
+			   }
+		   }
+	   }
+
+private: System::Void Inicio_Paint_1(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
+	dibujarTrazado(e);
+}
+};
 }
