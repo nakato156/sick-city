@@ -7,13 +7,18 @@ using namespace System::Drawing;
 Enfermero::Enfermero(int posX, int posY, int velocidad){
 	this->posX = posX;
 	this->posY = posY;
+
 	this->velocidad = velocidad;
 	velocidadNormal = velocidad;
+	
 	indiceX = 0;	//falta definir tras sprite
 	indiceY = 0;	//falta definir tras sprite
+	
 	alto = 56;		//falta definir tras sprite
 	ancho = 40;		//falta definir tras sprite
+	
 	vidas = 5;
+	
 	ultimatecla = Derecha;
 	direccion = Ninguna;
 }

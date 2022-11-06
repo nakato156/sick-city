@@ -2,8 +2,8 @@
 #include <iostream>
 #include "Personaje.h"
 #include "Enfermero.h"
-#include "Enfermo.h"
 #include "GestorEnfermo.h"
+#include "GestorBalas.h"
 
 namespace TrabajoFinal {
 
@@ -22,11 +22,14 @@ namespace TrabajoFinal {
 	private:
 		Enfermero* enfermero = new Enfermero(10, 300, 10);
 		GesContagiado* g_contagiado = new GesContagiado();
+		GestorBalas* lista_balas = new GestorBalas();
+		//DEFINIR RUTA DEL SPRITE
 		Bitmap^ mapa_contagiados = gcnew Bitmap("abeja.png");
+		Bitmap^ mapa_enfermero = gcnew Bitmap("hulk.png");
+		Bitmap^ mapa_bala= gcnew Bitmap("hulk.png");
+
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
-		   //DEFINIR RUTA DEL SPRITE
-		Bitmap^ mapa_enfermero = gcnew Bitmap("hulk.png");
 	public:
 		Level1(void)
 		{
@@ -113,6 +116,7 @@ namespace TrabajoFinal {
 
 		//movimientos
 		enfermero->mueveEnfermero(buffer, mapa_enfermero);
+		lista_balas->animar(buffer, mapa_bala);
 		g_contagiado->moverContagiados(buffer, mapa_contagiados, enfermero);
 		
 		buffer->Render(canvaFormulario);
@@ -123,6 +127,8 @@ namespace TrabajoFinal {
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(5);
 		switch (e->KeyCode) {
+		case Keys::Space:
+			lista_balas->addBala(new Bala(56, 40, enfermero->getX(), enfermero->getY(), 10));
 		case Keys::Left:
 			enfermero->setDireccion(Izquierda);
 			break;

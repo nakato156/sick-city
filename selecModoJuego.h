@@ -1,4 +1,5 @@
 #pragma once
+#include "Level1.h"
 
 namespace TrabajoFinal {
 
@@ -107,6 +108,7 @@ namespace TrabajoFinal {
 			this->imgSingleplayer->Size = System::Drawing::Size(152, 103);
 			this->imgSingleplayer->TabIndex = 3;
 			this->imgSingleplayer->TabStop = false;
+			this->imgSingleplayer->Click += gcnew System::EventHandler(this, &selecModoJuego::imgSingleplayer_Click);
 			// 
 			// imgMultiplayer
 			// 
@@ -143,5 +145,10 @@ namespace TrabajoFinal {
 
 		}
 #pragma endregion
-	};
+	private: System::Void imgSingleplayer_Click(System::Object^ sender, System::EventArgs^ e) {
+		Level1^ lvl1 = gcnew Level1();
+		this->Visible = false;
+		lvl1->Show();
+	}
+};
 }

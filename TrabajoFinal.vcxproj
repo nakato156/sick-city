@@ -120,8 +120,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bala.cpp" />
     <ClCompile Include="Contagiado.cpp" />
     <ClCompile Include="Enfermero.cpp" />
+    <ClCompile Include="GestorBalas.cpp" />
     <ClCompile Include="GestorContagiado.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mochila.cpp" />
@@ -129,9 +131,11 @@
     <ClCompile Include="selecModoJuego.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bala.h" />
     <ClInclude Include="constantes.h" />
     <ClInclude Include="Enfermero.h" />
     <ClInclude Include="Enfermo.h" />
+    <ClInclude Include="GestorBalas.h" />
     <ClInclude Include="GestorEnfermo.h" />
     <ClInclude Include="Inicio.h">
       <FileType>CppForm</FileType>
