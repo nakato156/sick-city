@@ -19,6 +19,7 @@ namespace TrabajoFinal {
 		Inicio(void)
 		{
 			InitializeComponent();
+			this->leftMsg = this->label1->Left - 120;
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -60,6 +61,8 @@ namespace TrabajoFinal {
 			// 
 			// txtInputName
 			// 
+			this->txtInputName->BackColor = System::Drawing::SystemColors::Window;
+			this->txtInputName->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
 			this->txtInputName->Font = (gcnew System::Drawing::Font(L"Courier New", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->txtInputName->Location = System::Drawing::Point(357, 223);
@@ -78,14 +81,20 @@ namespace TrabajoFinal {
 			this->label1->Size = System::Drawing::Size(197, 21);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Ingrese su nombre";
-			this->leftMsg = this->label1->Left - 100;
 			// 
 			// Inicio
 			// 
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Inherit;
+			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(875, 393);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->txtInputName);
+			this->ForeColor = System::Drawing::Color::White;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->MaximizeBox = false;
+			this->MinimizeBox = false;
 			this->Name = L"Inicio";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Inicio::Inicio_Paint_1);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -121,24 +130,25 @@ private: System::Void textInputName_KeyPress(System::Object^ sender, System::Win
 		   trazado->Transform(matriz);
 		   // Crear lapicero
 		   // Dibuja el trazado de dibujo en la pantalla.
-		   e->Graphics->DrawPath(Pens::Black, trazado);
+		   e->Graphics->DrawPath(Pens::White, trazado);
 		   //Disfuncionales
 		   Graphics^ canva = this->CreateGraphics();
 		   Drawing::Font^ tipoLetra = gcnew Drawing::Font("Times New Roman", 42);
 		   //canva->Clear(Color::White);						color de fondo
-		   canva->DrawString("Los Disfuncionales", tipoLetra, Brushes::Red, (ancho / 3) - 50, 7);
+		   canva->DrawString("Los Disfuncionales", tipoLetra, Brushes::Red, (ancho / 3) - 50, 25);
 
 	   }
 	   void checkName(System::Windows::Forms::KeyPressEventArgs^ e) {
 		   if (e->KeyChar == '\r') {
-			   if (this->txtInputName->Text->Trim() == "") {
+			   if (this->txtInputName->Text->Trim()->Equals("")) {
 				   this->label1->Left = leftMsg;
 				   this->label1->Text = "Por favor ingrese su nombre para continuar";
 			   }
 			   else {
-				   System::String^ name = System::Convert::ToString(this->txtInputName->Text);
+				   System::String^ name = System::Convert::ToString(this->txtInputName->Text->Trim());
 				   selecModoJuego^ VModoJuego = gcnew TrabajoFinal::selecModoJuego(name);
-				   VModoJuego->ShowDialog();
+				   this->Visible = false;
+				   VModoJuego->Show();
 			   }
 		   }
 	   }

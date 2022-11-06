@@ -14,13 +14,13 @@ namespace TrabajoFinal {
 	/// </summary>
 	public ref class selecModoJuego : public System::Windows::Forms::Form
 	{
-	private:
-		System::String^ name;
 	public:
+		System::String^ name;
 		selecModoJuego(System::String^ name_)
 		{
 			name = name_;
 			InitializeComponent();
+			this->msgBienvenida->Text += name + ", escoja su modo de juego!";
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -41,6 +41,8 @@ namespace TrabajoFinal {
 	protected:
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::Label^ label2;
+	private: System::Windows::Forms::PictureBox^ imgSingleplayer;
+	private: System::Windows::Forms::PictureBox^ imgMultiplayer;
 
 	private:
 		/// <summary>
@@ -58,6 +60,10 @@ namespace TrabajoFinal {
 			this->msgBienvenida = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->imgSingleplayer = (gcnew System::Windows::Forms::PictureBox());
+			this->imgMultiplayer = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgSingleplayer))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMultiplayer))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// msgBienvenida
@@ -69,14 +75,14 @@ namespace TrabajoFinal {
 			this->msgBienvenida->Name = L"msgBienvenida";
 			this->msgBienvenida->Size = System::Drawing::Size(131, 21);
 			this->msgBienvenida->TabIndex = 0;
-			this->msgBienvenida->Text = L"Bienvenido " + name + ", escoja el modo de juego!";
+			this->msgBienvenida->Text = L"Bienvenido ";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Courier New", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(160, 264);
+			this->label1->Location = System::Drawing::Point(156, 264);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(108, 18);
 			this->label1->TabIndex = 1;
@@ -93,18 +99,45 @@ namespace TrabajoFinal {
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Multijugador";
 			// 
+			// imgSingleplayer
+			// 
+			this->imgSingleplayer->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->imgSingleplayer->Location = System::Drawing::Point(134, 144);
+			this->imgSingleplayer->Name = L"imgSingleplayer";
+			this->imgSingleplayer->Size = System::Drawing::Size(152, 103);
+			this->imgSingleplayer->TabIndex = 3;
+			this->imgSingleplayer->TabStop = false;
+			// 
+			// imgMultiplayer
+			// 
+			this->imgMultiplayer->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->imgMultiplayer->Location = System::Drawing::Point(497, 144);
+			this->imgMultiplayer->Name = L"imgMultiplayer";
+			this->imgMultiplayer->Size = System::Drawing::Size(152, 103);
+			this->imgMultiplayer->TabIndex = 4;
+			this->imgMultiplayer->TabStop = false;
+			// 
 			// selecModoJuego
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(875, 393);
+			this->ControlBox = false;
+			this->Controls->Add(this->imgMultiplayer);
+			this->Controls->Add(this->imgSingleplayer);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->msgBienvenida);
+			this->ForeColor = System::Drawing::Color::White;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"selecModoJuego";
-			this->Text = L"selecModoJuego";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->TopMost = true;
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgSingleplayer))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMultiplayer))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
