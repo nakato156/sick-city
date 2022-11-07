@@ -129,6 +129,7 @@ namespace TrabajoFinal {
 		switch (e->KeyCode) {
 		case Keys::Space:
 			lista_balas->addBala(new Bala(56, 40, enfermero->getX(), enfermero->getY(), 10));
+			break;
 		case Keys::Left:
 			enfermero->setDireccion(Izquierda);
 			break;
