@@ -27,7 +27,8 @@ void Enfermero::setDireccion(Direcciones _direccion) {
 }
 int Enfermero::getX() { return posX; }
 int Enfermero::getY() { return posY; }
-
+int Enfermero::getAncho() { return ancho; }
+int Enfermero::getAlto() { return alto; }
 void Enfermero::addVelocidad(int vel) { velocidad += vel; }
 void Enfermero::resetVelocidad() { velocidad = velocidadNormal; }
 

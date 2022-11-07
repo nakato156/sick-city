@@ -12,7 +12,8 @@ public:
 	void setDireccion(Direcciones _direccion);
 	int getX();	
 	int getY();	
-	
+	int getAncho();
+	int getAlto();
 	void addVelocidad(int);
 	void resetVelocidad();
 

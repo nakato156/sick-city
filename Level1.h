@@ -118,13 +118,14 @@ namespace TrabajoFinal {
 		enfermero->mueveEnfermero(buffer, mapa_enfermero);
 		lista_balas->animar(buffer, mapa_bala);
 		g_contagiado->moverContagiados(buffer, mapa_contagiados, enfermero);
-		for (auto contagiado : g_contagiado->lista_contagiados) {
-			for (auto bala : lista_balas->lista)
+		for (auto bala : lista_balas->lista) {
+			for (auto contagiado : g_contagiado->lista_contagiados) 
 			{
 				contagiado->checkColision(bala);
 				if (contagiado->getColision()) {
+					bala->setColision(true);
 					g_contagiado->actualizarLista();
-						std::cout << "colision";
+					lista_balas->actualizarLista();
 				}
 			}
 		}
@@ -138,7 +139,7 @@ namespace TrabajoFinal {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(5);
 		switch (e->KeyCode) {
 		case Keys::Space:
-			lista_balas->addBala(new Bala(40, 10, enfermero->getX(), enfermero->getY(), 10));
+			lista_balas->addBala(new Bala(40, 10, enfermero, 10));
 			break;
 		case Keys::Left:
 			enfermero->setDireccion(Izquierda);
