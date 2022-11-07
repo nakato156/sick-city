@@ -46,3 +46,16 @@ bool Contagiado::checkColision(Bala* bala) {
 bool Contagiado::getColision() {
 	return colision;
 }
+bool Contagiado::checkColisionEnfermero(Enfermero* enfermero) {
+	int xEnfermero = enfermero->getX(); int yEnfermero = enfermero->getY();
+	int anchoEnfermero = enfermero->getAncho(); int altoEnfermero = enfermero->getAlto();
+	if (posX + ancho > xEnfermero && posX < xEnfermero + anchoEnfermero &&
+		posY + alto >yEnfermero && posY < yEnfermero + altoEnfermero) {
+		colisionEnfermero = true;
+	}
+	return colisionEnfermero;
+}
+bool Contagiado::getColisionEnfermero() { return colisionEnfermero; }
+void Contagiado::setColisionEnfermero(bool _colosionE) {
+	colisionEnfermero = _colosionE;
+}

@@ -118,18 +118,26 @@ namespace TrabajoFinal {
 		enfermero->mueveEnfermero(buffer, mapa_enfermero);
 		lista_balas->animar(buffer, mapa_bala);
 		g_contagiado->moverContagiados(buffer, mapa_contagiados, enfermero);
-		for (auto bala : lista_balas->lista) {
-			for (auto contagiado : g_contagiado->lista_contagiados) 
+		//chequear colisiones
+		for (auto bala : lista_balas->lista) { //recorrer la lista de balas
+			for (auto contagiado : g_contagiado->lista_contagiados)  //recorrer lista de contagiados
 			{
-				contagiado->checkColision(bala);
+				contagiado->checkColision(bala); //chequear colision de la bala con los enfermos
 				if (contagiado->getColision()) {
-					bala->setColision(true);
-					g_contagiado->actualizarLista();
-					lista_balas->actualizarLista();
+					bala->setColision(true);                      //si hay colision, cambiar el estaod de la bala
+					g_contagiado->actualizarLista();		//eliminar el contagiado colisionado
+					lista_balas->actualizarLista();				//eliminar la bala que colisiono
 				}
 			}
 		}
-		
+		for (auto contagiados : g_contagiado->lista_contagiados) { //recorrer la lista de contagiados
+			contagiados->checkColisionEnfermero(enfermero);			//chequear la colision del contagiado con el enfermero
+			if (contagiados->getColisionEnfermero()) {
+				enfermero->reset();
+				contagiados->setColisionEnfermero(false);
+			}
+		}
+
 		buffer->Render(canvaFormulario);
 		delete buffer;
 		delete canvaFormulario;

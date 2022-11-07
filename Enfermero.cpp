@@ -1,6 +1,6 @@
 #include "Enfermero.h"
 #include "constantes.h"
-
+#include <iostream>
 using namespace std;
 using namespace System::Drawing;
 
@@ -27,8 +27,8 @@ void Enfermero::setDireccion(Direcciones _direccion) {
 }
 int Enfermero::getX() { return posX; }
 int Enfermero::getY() { return posY; }
-int Enfermero::getAncho() { return ancho; }
-int Enfermero::getAlto() { return alto; }
+int Enfermero::getAncho() { return ancho/2; }
+int Enfermero::getAlto() { return alto/2; }
 void Enfermero::addVelocidad(int vel) { velocidad += vel; }
 void Enfermero::resetVelocidad() { velocidad = velocidadNormal; }
 
@@ -98,4 +98,9 @@ void Enfermero::mueveEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 		}
 		break;
 	}
+}
+void Enfermero::reset() {
+	posX = 10;
+	posY = 300;
+	vidas--;	
 }

@@ -6,6 +6,7 @@
 class Contagiado : public Personaje {
 private:
 	bool colision = false;
+	bool colisionEnfermero = false;
 public:
 	Contagiado(int anchoV, int velocidad);
 	~Contagiado();
@@ -13,4 +14,7 @@ public:
 	void mueveContagiado(System::Drawing::BufferedGraphics^ buffer, System::Drawing::Bitmap^ bmp, Enfermero*);
 	bool getColision();
 	bool checkColision(Bala* bala);
+	bool getColisionEnfermero();
+	bool checkColisionEnfermero(Enfermero* enfermero);
+	void setColisionEnfermero(bool _colisionE);
 };
