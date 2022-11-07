@@ -14,8 +14,8 @@ Enfermero::Enfermero(int posX, int posY, int velocidad){
 	indiceX = 0;	//falta definir tras sprite
 	indiceY = 0;	//falta definir tras sprite
 	
-	alto = 56;		//falta definir tras sprite
-	ancho = 40;		//falta definir tras sprite
+	alto = 161;		//falta definir tras sprite
+	ancho = 132;		//falta definir tras sprite
 	
 	vidas = 5;
 	
@@ -35,7 +35,7 @@ void Enfermero::dibujaEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 	Rectangle areaUsar = Rectangle(indiceX * ancho, indiceY * alto, ancho, alto);
 	
 	//aumentar el tamanio del personaje
-	Rectangle aumentoDeEnfermero = Rectangle(posX, posY, ancho * 1.2, alto * 1.2);
+	Rectangle aumentoDeEnfermero = Rectangle(posX, posY, ancho / 2, alto / 2);
 	buffer->Graphics->DrawImage(bmp, aumentoDeEnfermero, areaUsar, GraphicsUnit::Pixel);
 }
 void Enfermero::mueveEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
@@ -53,7 +53,7 @@ void Enfermero::mueveEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 		ultimatecla = Abajo;
 		break;
 	case Arriba:
-		indiceY = 3;
+		indiceY = 0;
 		if (indiceX >= 0 && indiceX < 3) indiceX++;
 		else indiceX = 0;
 		
@@ -61,7 +61,7 @@ void Enfermero::mueveEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 		ultimatecla = Arriba;
 		break;
 	case Izquierda:
-		indiceY = 1;
+		indiceY = 0;
 		if (indiceX >= 0 && indiceX < 3) indiceX++;
 		else indiceX = 0;
 
@@ -69,7 +69,7 @@ void Enfermero::mueveEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 		ultimatecla = Izquierda;
 		break;
 	case Derecha:
-		indiceY = 2;
+		indiceY = 0;
 		if (indiceX >= 0 && indiceX < 3) indiceX++;
 		else indiceX = 0;
 		
@@ -79,20 +79,20 @@ void Enfermero::mueveEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 	case Ninguna:
 		switch (ultimatecla) {
 		case Abajo:
-			indiceX = 2;
+			indiceX = 1;
 			indiceY = 0;
 			break;
 		case Arriba:
-			indiceX = 2;
-			indiceY = 3;
+			indiceX = 3;
+			indiceY = 0;
 			break;
 		case Izquierda:
-			indiceX = 1;
-			indiceY = 1;
+			indiceX = 0;
+			indiceY = 0;
 			break;
 		case Derecha:
-			indiceX = 2;
-			indiceY = 2;
+			indiceX = 0;
+			indiceY = 1;
 			break;
 		}
 		break;

@@ -11,7 +11,7 @@ Bala::Bala(int ancho_, int alto_, int enfX, int enfY, int vel) {
 	velocidad = vel;
 	ancho = ancho_; alto = alto_;
 	posX = enfX;
-	posY = enfY + 3;
+	posY = enfY + 15;
 }
 
 void Bala::Mover() { posX += velocidad; }
@@ -25,4 +25,16 @@ void Bala::Dibujar(BufferedGraphics^ buffer, Bitmap^ bmp) {
 void Bala::Animar(BufferedGraphics^ buffer, Bitmap^ bmp){
 	Mover();
 	Dibujar(buffer, bmp);
+}
+int Bala::getX() { 
+	return posX;
+}
+int Bala::getY() {
+	return posY;
+}
+int Bala::getAncho() {
+	return ancho;
+}
+int Bala::getAlto() {
+	return alto;
 }

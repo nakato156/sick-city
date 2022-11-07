@@ -34,3 +34,15 @@ void Contagiado::mueveContagiado(BufferedGraphics^ buffer, Bitmap^ bmp, Enfermer
 
 	indiceX < 3 ? indiceX++ : indiceX = 0;
 }
+bool Contagiado::checkColision(Bala* bala) {
+	int xBala = bala->getX(); int yBala = bala->getY();
+	int anchoBala = bala->getAncho(); int altoBala = bala->getAlto();
+	if (posX + ancho > xBala && posX < xBala + anchoBala &&
+		posY + alto > yBala && posY < yBala + altoBala) {
+		colision = true;
+	}
+	return colision;
+}
+bool Contagiado::getColision() {
+	return colision;
+}

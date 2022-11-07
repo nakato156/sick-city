@@ -14,4 +14,8 @@ public:
 	void Mover();
 	void Dibujar(System::Drawing::BufferedGraphics^, System::Drawing::Bitmap^);
 	void Animar(System::Drawing::BufferedGraphics^, System::Drawing::Bitmap^);
+	int getX();
+	int getY();
+	int getAncho();
+	int getAlto();
 };
