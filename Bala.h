@@ -7,6 +7,7 @@
 class Bala : public Item {
 private:
 	bool colision = false;
+	bool salida = false;
 	int velocidad;
 	System::Drawing::Rectangle areaUsar;
 	System::Drawing::Rectangle aumento;
@@ -22,4 +23,6 @@ public:
 	int getAlto();
 	bool getColision();
 	void setColision(bool _colision);
+	bool checkSalida(System::Drawing::BufferedGraphics^ buffer);
+	bool getSalida();
 };

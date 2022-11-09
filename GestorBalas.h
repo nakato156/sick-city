@@ -1,7 +1,6 @@
 #pragma once
 #include "Bala.h"
 #include <vector>
-#include "Enfermo.h"
 
 class GestorBalas {
 	
@@ -13,4 +12,6 @@ public:
 	void addBala(Bala*);
 	void delBala(Bala*);
 	void actualizarLista();
+	void actualizarSalida(System::Drawing::BufferedGraphics^ buffer);
+
 };

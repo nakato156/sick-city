@@ -1,5 +1,4 @@
 #include "GestorBalas.h"
-
 using namespace std;
 using namespace System::Drawing;
 
@@ -11,6 +10,7 @@ void GestorBalas::animar(BufferedGraphics^ buffer, Bitmap^ bmp) {
 	for (auto bala : lista) bala->Animar(buffer, bmp); 
 }
 void GestorBalas::delBala(Bala* bala) {}
+
 void GestorBalas::actualizarLista() {
 	vector <Bala*> lista_nueva;
 	for (auto bala : lista) {
@@ -20,4 +20,14 @@ void GestorBalas::actualizarLista() {
 		}
 	}
 	lista = lista_nueva;
+}
+void GestorBalas::actualizarSalida(System::Drawing::BufferedGraphics^ buffer) {
+	vector <Bala*> nueva_lista;
+	for (auto bala : lista) {
+		if (bala->checkSalida(buffer)) {
+			continue;
+		}
+		nueva_lista.push_back(bala);
+	}
+	lista = nueva_lista;
 }

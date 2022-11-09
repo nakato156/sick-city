@@ -1,5 +1,4 @@
 #include "Bala.h"
-
 using namespace std;
 using namespace System::Drawing;
 
@@ -40,3 +39,11 @@ int Bala::getAlto() {
 }
 bool Bala::getColision() { return colision; }
 void Bala::setColision(bool _colision) { colision = _colision; }
+
+bool Bala::checkSalida(System::Drawing::BufferedGraphics^ buffer) {
+	if (posX + ancho >= buffer->Graphics->VisibleClipBounds.Width) {
+		salida = true;
+	}
+	return salida;
+}
+bool Bala::getSalida() { return salida; }

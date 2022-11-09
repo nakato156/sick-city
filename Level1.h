@@ -129,6 +129,7 @@ namespace TrabajoFinal {
 					lista_balas->actualizarLista();				//eliminar la bala que colisiono
 				}
 			}
+			lista_balas->actualizarSalida(buffer);
 		}
 		for (auto contagiados : g_contagiado->lista_contagiados) { //recorrer la lista de contagiados
 			contagiados->checkColisionEnfermero(enfermero);			//chequear la colision del contagiado con el enfermero
