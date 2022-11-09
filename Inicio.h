@@ -67,7 +67,7 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->txtInputName->Location = System::Drawing::Point(357, 223);
 			this->txtInputName->Name = L"txtInputName";
-			this->txtInputName->Size = System::Drawing::Size(197, 29);
+			this->txtInputName->Size = System::Drawing::Size(197, 40);
 			this->txtInputName->TabIndex = 0;
 			this->txtInputName->KeyPress += gcnew System::Windows::Forms::KeyPressEventHandler(this, &Inicio::textInputName_KeyPress);
 			// 
@@ -78,7 +78,7 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(357, 255);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(197, 21);
+			this->label1->Size = System::Drawing::Size(304, 32);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Ingrese su nombre";
 			// 
@@ -95,6 +95,7 @@ namespace TrabajoFinal {
 			this->MinimizeBox = false;
 			this->Name = L"Inicio";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->Load += gcnew System::EventHandler(this, &Inicio::Inicio_Load);
 			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Inicio::Inicio_Paint_1);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -155,6 +156,8 @@ private: System::Void textInputName_KeyPress(System::Object^ sender, System::Win
 
 private: System::Void Inicio_Paint_1(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 	dibujarTrazado(e);
+}
+private: System::Void Inicio_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 };
 }

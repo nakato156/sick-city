@@ -13,7 +13,7 @@ void GesContagiado::agregaContagiado(Contagiado* oc) {
 void GesContagiado::creaContagiados(int cantidad) {
 	Contagiado* oc;
 	for (int i = 0; i < cantidad; i++) {
-		oc = new Contagiado(WIDTH_VENTANA + rand() % (WIDTH_VENTANA / 2), 4);
+		oc = new Contagiado(WIDTH_VENTANA + rand() % (WIDTH_VENTANA / 2), 8);
 		lista_contagiados.push_back(oc);
 	}
 	_sleep(50);

@@ -1,4 +1,5 @@
 #pragma once
+#include<conio.h>
 #include <iostream>
 #include "Personaje.h"
 #include "Enfermero.h"
@@ -37,7 +38,8 @@ namespace TrabajoFinal {
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			int cantidad = 7 + rand() % 20 - 7;
+			Random r;
+			int cantidad = r.Next(5, 20);
 			g_contagiado->creaContagiados(cantidad);
 		}
 
@@ -148,7 +150,7 @@ namespace TrabajoFinal {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(5);
 		switch (e->KeyCode) {
 		case Keys::Space:
-			lista_balas->addBala(new Bala(40, 10, enfermero, 10));
+			lista_balas->addBala(new Bala(40, 10, enfermero, 30));
 			break;
 		case Keys::Left:
 			enfermero->setDireccion(Izquierda);

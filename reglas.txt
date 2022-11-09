@@ -1,0 +1,31 @@
+	============================================================================================================
+	-Este juego consiste en curar a todos los enfermos que salen en la pantalla.
+	-Las reglas son las siguientes:
+	-El juego se divide en 2 niveles.
+	*Nivel 1 sencillo:
+	-El jugador tendra consigo su arma, con la cual disparara hacia los contagiados.
+	-Cuando la bala colisione con el enemigo, este desaparecera "curado" de la pantalla.
+	-Si el contagiado choca contigo, perderas una vida y volveras a tu lugar original
+	-Pasas al nivel 2 cuando logres curar a todos los enfermos que aparezcan en la pantalla.
+	*Nivel 2 dificil:
+	-El jugador tendrá su arma pero las balas seran limitadas.
+	-El jugador tendrá que recoger las balas que apareceran cada cierto tiempo en la pantalla.
+	-Los contagiados son más rapidos y fuertes. Aguantaran entre 2 a 3 disparos.
+	-El jugador tiene solamente 3 vidas.
+	*El juego acaba en dos oportunidades:
+	-Si curas y pasas con exito los dos niveles. 
+	-Si pierdes tus 3 vidas.
+	============================================================================================================
+¿Como jugar? 
+Primero elegimos a nuestro personaje, en caso de que seas hombre o mujer.
+Posteriormente elegiras tu modo de juego y colocaras tu nombre.
+El movimiento del personaje se hace con las direccionales:
+	^
+      >   <
+	v
+^: Direccional hacia arriba->Subir.
+<: Direccional hacia la izquierda->Retroceder.
+v: Direccional hacia abajo->Bajar.
+>: Direccional hace la derecha->Avanzar.
+Disparas con el "espacio".
+Aumentas velocidad presionando a la vez "Ctrl" + el direccional.

@@ -127,6 +127,7 @@
     <ClCompile Include="GestorContagiado.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mochila.cpp" />
+    <ClCompile Include="Reglas.cpp" />
     <ClCompile Include="screenGameOver.cpp" />
     <ClCompile Include="selecModoJuego.cpp" />
   </ItemGroup>
@@ -138,6 +139,9 @@
     <ClInclude Include="GestorBalas.h" />
     <ClInclude Include="GestorEnfermo.h" />
     <ClInclude Include="Inicio.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Reglas.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="screenGameOver.h">
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Level1.resx">
       <DependentUpon>Level1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reglas.resx">
+      <DependentUpon>Reglas.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="screenGameOver.resx">
       <DependentUpon>screenGameOver.h</DependentUpon>
