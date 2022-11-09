@@ -24,7 +24,7 @@ namespace TrabajoFinal {
 		GesContagiado* g_contagiado = new GesContagiado();
 		GestorBalas* lista_balas = new GestorBalas();
 		//DEFINIR RUTA DEL SPRITE
-		Bitmap^ mapa_contagiados = gcnew Bitmap("abeja.png");
+		Bitmap^ mapa_contagiados = gcnew Bitmap("enfermo.png");
 		Bitmap^ mapa_enfermero = gcnew Bitmap("enfermero.png");
 		Bitmap^ mapa_bala= gcnew Bitmap("bala.png");
 

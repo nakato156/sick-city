@@ -36,7 +36,7 @@ void Enfermero::dibujaEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 	Rectangle areaUsar = Rectangle(indiceX * ancho, indiceY * alto, ancho, alto);
 	
 	//aumentar el tamanio del personaje
-	Rectangle aumentoDeEnfermero = Rectangle(posX, posY, ancho, alto);
+	Rectangle aumentoDeEnfermero = Rectangle(posX, posY, ancho * 3, alto * 3);
 	buffer->Graphics->DrawImage(bmp, aumentoDeEnfermero, areaUsar, GraphicsUnit::Pixel);
 }
 

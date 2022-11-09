@@ -9,7 +9,7 @@ Contagiado::Contagiado(int anchoV, int vel) {
 	vidas = 1;
 	indiceX = 0; indiceY = 0;
 	//DEFINIR CON SPRITE
-	alto = 64; ancho = 64;
+	alto = 230; ancho = 220;
 
 	posX = anchoV;
 	posY = LIMITE_PISO  + rand() % (HEIGHT_VENTANA - LIMITE_PISO );
@@ -19,11 +19,13 @@ Contagiado::~Contagiado(){}
 void Contagiado::dibujaContagiado(BufferedGraphics^ buffer, Bitmap^ bmp) {
 	Rectangle areaUsar = Rectangle(indiceX * ancho, indiceY * alto, ancho, alto);
 	//aumentar el tamanio del personaje
-	Rectangle aumentoDeContagiado = Rectangle(posX, posY, ancho * 1.2, alto * 1.2);
+	Rectangle aumentoDeContagiado = Rectangle(posX, posY, ancho / 3, alto / 3);
 	buffer->Graphics->DrawImage(bmp, aumentoDeContagiado, areaUsar, GraphicsUnit::Pixel);
 }
 
 void Contagiado::mueveContagiado(BufferedGraphics^ buffer, Bitmap^ bmp, Enfermero* enfermero) {
+	//std::cout << indiceX << "," << indiceY << endl;
+	indiceY = 1;
 	dibujaContagiado(buffer, bmp);
 	
 	int enfX = enfermero->getX();
