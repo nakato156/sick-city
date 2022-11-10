@@ -130,6 +130,7 @@
     <ClCompile Include="Reglas.cpp" />
     <ClCompile Include="screenGameOver.cpp" />
     <ClCompile Include="selecModoJuego.cpp" />
+    <ClCompile Include="selecPersonaje.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bala.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="Inicio.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MyFormdePersonaje.h" />
     <ClInclude Include="Reglas.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -156,6 +158,9 @@
     <ClInclude Include="selecModoJuego.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="selecPersonaje.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Inicio.resx">
@@ -167,6 +172,7 @@
     <EmbeddedResource Include="Level1.resx">
       <DependentUpon>Level1.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MyFormdePersonaje.resx" />
     <EmbeddedResource Include="Reglas.resx">
       <DependentUpon>Reglas.h</DependentUpon>
     </EmbeddedResource>
@@ -175,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="selecModoJuego.resx">
       <DependentUpon>selecModoJuego.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="selecPersonaje.resx">
+      <DependentUpon>selecPersonaje.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

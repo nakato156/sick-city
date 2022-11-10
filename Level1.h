@@ -26,13 +26,13 @@ namespace TrabajoFinal {
 		GestorBalas* lista_balas = new GestorBalas();
 		//DEFINIR RUTA DEL SPRITE
 		Bitmap^ mapa_contagiados = gcnew Bitmap("enfermo.png");
-		Bitmap^ mapa_enfermero = gcnew Bitmap("enfermero.png");
+		Bitmap^ mapa_enfermero;
 		Bitmap^ mapa_bala= gcnew Bitmap("bala.png");
 
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
-		Level1(void)
+		Level1(System::String^ personaje)
 		{
 			InitializeComponent();
 			//
@@ -41,6 +41,7 @@ namespace TrabajoFinal {
 			Random r;
 			int cantidad = r.Next(5, 20);
 			g_contagiado->creaContagiados(cantidad);
+			mapa_enfermero = gcnew Bitmap(personaje +  ".png");
 		}
 
 	protected:
