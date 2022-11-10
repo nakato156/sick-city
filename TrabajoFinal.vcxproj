@@ -130,6 +130,7 @@
     <ClCompile Include="Reglas.cpp" />
     <ClCompile Include="screenGameOver.cpp" />
     <ClCompile Include="selecModoJuego.cpp" />
+    <ClCompile Include="selecPersonaje.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bala.h" />
@@ -156,6 +157,9 @@
     <ClInclude Include="selecModoJuego.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="selecPersonaje.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Inicio.resx">
@@ -175,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="selecModoJuego.resx">
       <DependentUpon>selecModoJuego.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="selecPersonaje.resx">
+      <DependentUpon>selecPersonaje.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

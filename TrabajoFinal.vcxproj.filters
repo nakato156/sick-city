@@ -45,6 +45,9 @@
     <ClCompile Include="Reglas.cpp">
       <Filter>Archivos de origen</Filter>
     </ClCompile>
+    <ClCompile Include="selecPersonaje.cpp">
+      <Filter>Archivos de encabezado</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Level1.h">
@@ -89,5 +92,16 @@
     <ClInclude Include="Reglas.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
+    <ClInclude Include="MyFormdePersonaje.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="selecPersonaje.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MyFormdePersonaje.resx">
+      <Filter>Archivos de encabezado</Filter>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
