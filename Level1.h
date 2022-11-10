@@ -14,6 +14,7 @@ namespace TrabajoFinal {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Media;
 
 	/// <summary>
 	/// Resumen de Level1
@@ -24,12 +25,18 @@ namespace TrabajoFinal {
 		Enfermero* enfermero = new Enfermero(10, 300, 10);
 		GesContagiado* g_contagiado = new GesContagiado();
 		GestorBalas* lista_balas = new GestorBalas();
-		//DEFINIR RUTA DEL SPRITE
+		
+
 		Bitmap^ mapa_contagiados = gcnew Bitmap("enfermo.png");
 		Bitmap^ mapa_enfermero;
 		Bitmap^ mapa_bala= gcnew Bitmap("bala.png");
 
+		int sizeImgVida = 24;
+		int widthPantalla = this->ClientSize.Width;
+
 	private: System::Windows::Forms::Timer^ timer1;
+	private: System::Windows::Forms::PictureBox^ imgVidas;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
 		Level1(System::String^ personaje)
@@ -41,7 +48,9 @@ namespace TrabajoFinal {
 			Random r;
 			int cantidad = r.Next(5, 20);
 			g_contagiado->creaContagiados(cantidad);
+
 			mapa_enfermero = gcnew Bitmap(personaje +  ".png");
+			dibujaVidas();
 		}
 
 	protected:
@@ -75,7 +84,9 @@ namespace TrabajoFinal {
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Level1::typeid));
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			this->imgVidas = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// timer1
@@ -89,10 +100,18 @@ namespace TrabajoFinal {
 			this->pictureBox1->Name = L"pictureBox1";
 			this->pictureBox1->TabStop = false;
 			// 
+			// imgVidas
+			// 
+			this->imgVidas->BackColor = System::Drawing::Color::Transparent;
+			resources->ApplyResources(this->imgVidas, L"imgVidas");
+			this->imgVidas->Name = L"imgVidas";
+			//this->imgVidas->TabStop = false;
+			// 
 			// Level1
 			// 
 			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Controls->Add(this->imgVidas);
 			this->Controls->Add(this->pictureBox1);
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
@@ -101,10 +120,15 @@ namespace TrabajoFinal {
 			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Level1::Inicio_KeyDown);
 			this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &Level1::Inicio_KeyUp);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->EndInit();
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
+	private: void dibujaVidas() {
+		this->imgVidas->Width = enfermero->getVidas() * sizeImgVida;
+		this->imgVidas->Left = widthPantalla - this->imgVidas->Width - sizeImgVida;
+	}
 	private: System::Void Inicio_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
@@ -138,6 +162,7 @@ namespace TrabajoFinal {
 			contagiados->checkColisionEnfermero(enfermero);			//chequear la colision del contagiado con el enfermero
 			if (contagiados->getColisionEnfermero()) {
 				enfermero->reset();
+				dibujaVidas();
 				contagiados->setColisionEnfermero(false);
 			}
 		}
