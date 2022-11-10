@@ -29,6 +29,8 @@ int Enfermero::getX() { return posX; }
 int Enfermero::getY() { return posY; }
 int Enfermero::getAncho() { return ancho/3; }
 int Enfermero::getAlto() { return alto/3; }
+int Enfermero::getVidas() { return vidas; }
+
 void Enfermero::addVelocidad(int vel) { velocidad += vel; }
 void Enfermero::resetVelocidad() { velocidad = velocidadNormal; }
 
@@ -39,6 +41,7 @@ void Enfermero::dibujaEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 	Rectangle aumentoDeEnfermero = Rectangle(posX, posY, ancho/3, alto/3);
 	buffer->Graphics->DrawImage(bmp, aumentoDeEnfermero, areaUsar, GraphicsUnit::Pixel);
 }
+
 
 void Enfermero::mueveEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 	dibujaEnfermero(buffer, bmp);

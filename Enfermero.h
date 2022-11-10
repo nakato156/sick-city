@@ -14,6 +14,8 @@ public:
 	int getY();	
 	int getAncho();
 	int getAlto();
+	int getVidas();
+
 	void addVelocidad(int);
 	void resetVelocidad();
 

@@ -17,7 +17,7 @@ namespace TrabajoFinal {
 	public ref class selecPersonaje : public System::Windows::Forms::Form
 	{
 	private:
-		bool playing = false;
+		bool playing = true;
 		System::String^ tipoPersonaje;
 		Bitmap^ fondo = gcnew Bitmap("fondo.png");
 		SoundPlayer^ audio = gcnew SoundPlayer("audio-juego.wav");
@@ -35,6 +35,7 @@ namespace TrabajoFinal {
 		selecPersonaje(void)
 		{
 			InitializeComponent();
+			this->audio->PlayLooping();
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -92,11 +93,12 @@ namespace TrabajoFinal {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 48, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::Lime;
-			this->label1->Location = System::Drawing::Point(217, 9);
+			this->label1->Location = System::Drawing::Point(218, 28);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(361, 81);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"SickCity";
+			this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
 			// 
 			// label2
 			// 
@@ -108,7 +110,8 @@ namespace TrabajoFinal {
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(333, 47);
 			this->label2->TabIndex = 7;
-			this->label2->Text = L"Seleccione personaje";
+			this->label2->Text = L"Seleccione su personaje";
+			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
 			// 
 			// pictureBox1
 			// 
@@ -159,7 +162,7 @@ namespace TrabajoFinal {
 			// button1
 			// 
 			this->button1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.Image")));
-			this->button1->Location = System::Drawing::Point(23, 12);
+			this->button1->Location = System::Drawing::Point(12, 28);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(30, 28);
 			this->button1->TabIndex = 10;
@@ -169,7 +172,7 @@ namespace TrabajoFinal {
 			// button2
 			// 
 			this->button2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.Image")));
-			this->button2->Location = System::Drawing::Point(59, 12);
+			this->button2->Location = System::Drawing::Point(60, 28);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(33, 28);
 			this->button2->TabIndex = 11;
@@ -200,7 +203,9 @@ namespace TrabajoFinal {
 			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"selecPersonaje";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"selecPersonaje";
 			this->Load += gcnew System::EventHandler(this, &selecPersonaje::selecPersonaje_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
