@@ -1,6 +1,6 @@
 #pragma once
 #include "Personaje.h"
-enum Direcciones { Ninguna, Abajo, Arriba, Izquierda, Derecha };
+enum Direcciones { Ninguna, Abajo, Arriba, Izquierda, Derecha, Disparar };
 class Enfermero : public Personaje{
 private:
 	int velocidadNormal;
@@ -19,6 +19,5 @@ public:
 
 	void dibujaEnfermero(System::Drawing::BufferedGraphics^ buffer, System::Drawing::Bitmap^ bmp);
 	void mueveEnfermero(System::Drawing::BufferedGraphics^ buffer, System::Drawing::Bitmap^ bmp);
-	void dispararEnfermero(int t, System::Drawing::BufferedGraphics^ buffer, System::Drawing::Bitmap^ bmp);
 	void reset();
 };
