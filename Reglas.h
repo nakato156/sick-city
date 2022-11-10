@@ -63,7 +63,7 @@ namespace TrabajoFinal {
 			this->button1->AutoSize = true;
 			this->button1->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->button1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->button1->Location = System::Drawing::Point(1162, 642);
+			this->button1->Location = System::Drawing::Point(1115, 609);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(135, 63);
 			this->button1->TabIndex = 0;
@@ -98,9 +98,10 @@ namespace TrabajoFinal {
 			   std::ifstream archivo;
 			   archivo.open("reglas.txt");
 			   std::string linea;
+			   std::string texto = "\n\n";
 			   if (archivo.is_open()) {
 				   while (getline(archivo, linea)) {
-					   std::cout << linea << std::endl;
+					   texto += linea + '\n';
 				   }
 				   archivo.close();
 			   } else exit(EXIT_FAILURE);
@@ -108,7 +109,10 @@ namespace TrabajoFinal {
 			   Graphics^ canva = this->CreateGraphics();
 			   int ancho = this->ClientSize.Width;
 			   Drawing::Font^ tipoLetra = gcnew Drawing::Font("Times New Roman", 20);
-			   canva->DrawString("Reglas del juego: ", tipoLetra, Brushes::Red, (ancho / 3) - 50, 25); std::cout << std::endl;
+			   Drawing::Font^ tipoLetraReglas = gcnew Drawing::Font("Times New Roman", 10);
+			   canva->DrawString("Reglas del juego: ", tipoLetra, Brushes::Red, (ancho / 3) - 50, 25);
+			   auto nuevoString = gcnew String(texto.c_str());
+			   canva->DrawString(nuevoString, tipoLetraReglas, Brushes::White, (ancho/5), 35);
 		   }
 	};
 }
