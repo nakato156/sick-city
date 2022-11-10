@@ -131,7 +131,7 @@ namespace TrabajoFinal {
 			this->radioButton1->TabIndex = 8;
 			this->radioButton1->TabStop = true;
 			this->radioButton1->Text = L"ENFERMERA";
-			this->radioButton1->TextAlign = System::Drawing::ContentAlignment::BottomLeft;
+			this->radioButton1->TextAlign = System::Drawing::ContentAlignment::BottomCenter;
 			this->radioButton1->UseVisualStyleBackColor = false;
 			this->radioButton1->CheckedChanged += gcnew System::EventHandler(this, &selecPersonaje::radioButton1_CheckedChanged);
 			this->radioButton1->MouseHover += gcnew System::EventHandler(this, &selecPersonaje::radioButton1_MouseHover);

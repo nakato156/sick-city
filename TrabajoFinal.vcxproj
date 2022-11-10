@@ -142,7 +142,6 @@
     <ClInclude Include="Inicio.h">
       <FileType>CppForm</FileType>
     </ClInclude>
-    <ClInclude Include="MyFormdePersonaje.h" />
     <ClInclude Include="Reglas.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -172,7 +171,6 @@
     <EmbeddedResource Include="Level1.resx">
       <DependentUpon>Level1.h</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MyFormdePersonaje.resx" />
     <EmbeddedResource Include="Reglas.resx">
       <DependentUpon>Reglas.h</DependentUpon>
     </EmbeddedResource>
