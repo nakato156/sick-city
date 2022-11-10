@@ -150,7 +150,9 @@ namespace TrabajoFinal {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(5);
 		switch (e->KeyCode) {
 		case Keys::Space:
+
 			lista_balas->addBala(new Bala(40, 10, enfermero, 30));
+
 			break;
 		case Keys::Left:
 			enfermero->setDireccion(Izquierda);
