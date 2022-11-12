@@ -236,6 +236,8 @@ namespace TrabajoFinal {
 				this->imgMuerte->Image = gcnew Bitmap("imgs/imgMuerte.png");
 				this->imgMuerte->Visible = true;
 			}
+			auto punto = this->imgMuerte->Location;
+			this->imgMuerte->Location = Point(punto.X - 2, punto.Y - 2);
 			this->imgMuerte->Width+= 3;
 			this->imgMuerte->Height+= 3;
 		}
