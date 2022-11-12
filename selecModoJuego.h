@@ -58,6 +58,7 @@ namespace TrabajoFinal {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(selecModoJuego::typeid));
 			this->msgBienvenida = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->label2 = (gcnew System::Windows::Forms::Label());
@@ -72,10 +73,9 @@ namespace TrabajoFinal {
 			this->msgBienvenida->AutoSize = true;
 			this->msgBienvenida->Font = (gcnew System::Drawing::Font(L"Courier New", 14.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->msgBienvenida->Location = System::Drawing::Point(80, 69);
-			this->msgBienvenida->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->msgBienvenida->Location = System::Drawing::Point(53, 45);
 			this->msgBienvenida->Name = L"msgBienvenida";
-			this->msgBienvenida->Size = System::Drawing::Size(202, 32);
+			this->msgBienvenida->Size = System::Drawing::Size(131, 21);
 			this->msgBienvenida->TabIndex = 0;
 			this->msgBienvenida->Text = L"Bienvenido ";
 			// 
@@ -84,10 +84,9 @@ namespace TrabajoFinal {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Courier New", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(234, 406);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label1->Location = System::Drawing::Point(156, 264);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(152, 27);
+			this->label1->Size = System::Drawing::Size(108, 18);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Un jugador";
 			// 
@@ -96,20 +95,19 @@ namespace TrabajoFinal {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Courier New", 12, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(765, 406);
-			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label2->Location = System::Drawing::Point(510, 264);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(180, 27);
+			this->label2->Size = System::Drawing::Size(128, 18);
 			this->label2->TabIndex = 2;
 			this->label2->Text = L"Multijugador";
 			// 
 			// imgSingleplayer
 			// 
 			this->imgSingleplayer->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->imgSingleplayer->Location = System::Drawing::Point(201, 222);
-			this->imgSingleplayer->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->imgSingleplayer->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"imgSingleplayer.Image")));
+			this->imgSingleplayer->Location = System::Drawing::Point(153, 118);
 			this->imgSingleplayer->Name = L"imgSingleplayer";
-			this->imgSingleplayer->Size = System::Drawing::Size(228, 158);
+			this->imgSingleplayer->Size = System::Drawing::Size(111, 143);
 			this->imgSingleplayer->TabIndex = 3;
 			this->imgSingleplayer->TabStop = false;
 			this->imgSingleplayer->Click += gcnew System::EventHandler(this, &selecModoJuego::imgSingleplayer_Click);
@@ -117,19 +115,19 @@ namespace TrabajoFinal {
 			// imgMultiplayer
 			// 
 			this->imgMultiplayer->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->imgMultiplayer->Location = System::Drawing::Point(746, 222);
-			this->imgMultiplayer->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->imgMultiplayer->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"imgMultiplayer.Image")));
+			this->imgMultiplayer->Location = System::Drawing::Point(456, 118);
 			this->imgMultiplayer->Name = L"imgMultiplayer";
-			this->imgMultiplayer->Size = System::Drawing::Size(228, 158);
+			this->imgMultiplayer->Size = System::Drawing::Size(217, 129);
 			this->imgMultiplayer->TabIndex = 4;
 			this->imgMultiplayer->TabStop = false;
 			// 
 			// selecModoJuego
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::Black;
-			this->ClientSize = System::Drawing::Size(1312, 605);
+			this->ClientSize = System::Drawing::Size(875, 393);
 			this->ControlBox = false;
 			this->Controls->Add(this->imgMultiplayer);
 			this->Controls->Add(this->imgSingleplayer);
@@ -138,7 +136,6 @@ namespace TrabajoFinal {
 			this->Controls->Add(this->msgBienvenida);
 			this->ForeColor = System::Drawing::Color::White;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"selecModoJuego";

@@ -1,7 +1,6 @@
 #pragma once
 #include<conio.h>
 #include <iostream>
-#include "Personaje.h"
 #include "Enfermero.h"
 #include "GestorEnfermo.h"
 #include "GestorBalas.h"
@@ -105,7 +104,7 @@ namespace TrabajoFinal {
 			this->imgVidas->BackColor = System::Drawing::Color::Transparent;
 			resources->ApplyResources(this->imgVidas, L"imgVidas");
 			this->imgVidas->Name = L"imgVidas";
-			//this->imgVidas->TabStop = false;
+			this->imgVidas->TabStop = false;
 			// 
 			// Level1
 			// 
@@ -113,6 +112,7 @@ namespace TrabajoFinal {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->Controls->Add(this->imgVidas);
 			this->Controls->Add(this->pictureBox1);
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"Level1";
@@ -127,7 +127,6 @@ namespace TrabajoFinal {
 #pragma endregion
 	private: void dibujaVidas() {
 		this->imgVidas->Width = enfermero->getVidas() * sizeImgVida;
-		this->imgVidas->Left = widthPantalla - this->imgVidas->Width - sizeImgVida;
 	}
 	private: System::Void Inicio_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
@@ -145,22 +144,23 @@ namespace TrabajoFinal {
 		enfermero->mueveEnfermero(buffer, mapa_enfermero);
 		lista_balas->animar(buffer, mapa_bala);
 		g_contagiado->moverContagiados(buffer, mapa_contagiados, enfermero);
+		
 		//chequear colisiones
-		for (auto bala : lista_balas->lista) { //recorrer la lista de balas
-			for (auto contagiado : g_contagiado->lista_contagiados)  //recorrer lista de contagiados
+		for (auto bala : lista_balas->lista) {
+			for (auto contagiado : g_contagiado->lista_contagiados)
 			{
-				contagiado->checkColision(bala); //chequear colision de la bala con los enfermos
-				if (contagiado->getColision()) {
-					bala->setColision(true);                      //si hay colision, cambiar el estaod de la bala
-					g_contagiado->actualizarLista();		//eliminar el contagiado colisionado
-					lista_balas->actualizarLista();				//eliminar la bala que colisiono
+				//chequear colision de la bala con los enfermos
+				if (contagiado->checkColision(bala)) {
+					bala->setColision(true);			//si hay colision, cambiar el estaod de la bala
+					g_contagiado->actualizarLista();	//eliminar el contagiado colisionado
+					lista_balas->actualizarLista();		//eliminar la bala que colisiono
 				}
 			}
 			lista_balas->actualizarSalida(buffer);
 		}
-		for (auto contagiados : g_contagiado->lista_contagiados) { //recorrer la lista de contagiados
-			contagiados->checkColisionEnfermero(enfermero);			//chequear la colision del contagiado con el enfermero
-			if (contagiados->getColisionEnfermero()) {
+		for (auto contagiados : g_contagiado->lista_contagiados) {
+			//chequear la colision del contagiado con el enfermero
+			if (contagiados->checkColisionEnfermero(enfermero)) {
 				enfermero->reset();
 				dibujaVidas();
 				contagiados->setColisionEnfermero(false);
@@ -173,7 +173,7 @@ namespace TrabajoFinal {
 		delete espacio;
 	}
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
-		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(5);
+		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);
 		switch (e->KeyCode) {
 		case Keys::Space:
 			enfermero->setDireccion(Disparar);

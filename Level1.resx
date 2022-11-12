@@ -8574,7 +8574,7 @@
 </value>
   </data>
   <data name="imgVidas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>789, 24</value>
+    <value>10, 24</value>
   </data>
   <data name="imgVidas.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 23</value>
