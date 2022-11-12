@@ -1,4 +1,5 @@
 #pragma once
+#include <string>
 
 namespace TrabajoFinal {
 
@@ -15,7 +16,7 @@ namespace TrabajoFinal {
 	public ref class screenGameOver : public System::Windows::Forms::Form
 	{
 	public:
-		screenGameOver(void)
+		screenGameOver(std::string timepoTranscurrido)
 		{
 			InitializeComponent();
 			//
