@@ -33,7 +33,7 @@ void Contagiado::mueveContagiado(BufferedGraphics^ buffer, Bitmap^ bmp, Enfermer
 	
 	posX += posX > enfX ? -velocidad : velocidad;
 	if(abs(posX - enfX) < 155) posY += posY > enfY ? -velocidad : velocidad;
-
+	
 	indiceX < 4 ? indiceX++ : indiceX = 0;
 }
 bool Contagiado::checkColision(Bala* bala) {
@@ -51,7 +51,7 @@ bool Contagiado::getColision() {
 bool Contagiado::checkColisionEnfermero(Enfermero* enfermero) {
 	int xEnfermero = enfermero->getX(); int yEnfermero = enfermero->getY();
 	int anchoEnfermero = enfermero->getAncho(); int altoEnfermero = enfermero->getAlto();
-	if (posX + ancho > xEnfermero && posX < xEnfermero + anchoEnfermero &&
+	if (posX + ancho> xEnfermero && posX < xEnfermero + anchoEnfermero - 20 &&
 		posY + alto >yEnfermero && posY < yEnfermero + altoEnfermero) {
 		colisionEnfermero = true;
 	}
