@@ -92,16 +92,11 @@
     <ClInclude Include="Reglas.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-    <ClInclude Include="MyFormdePersonaje.h">
-      <Filter>Archivos de encabezado</Filter>
-    </ClInclude>
     <ClInclude Include="selecPersonaje.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="MyFormdePersonaje.resx">
+    <ClInclude Include="Cronometro.h">
       <Filter>Archivos de encabezado</Filter>
-    </EmbeddedResource>
+    </ClInclude>
   </ItemGroup>
 </Project>

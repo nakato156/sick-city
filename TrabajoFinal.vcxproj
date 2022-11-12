@@ -135,6 +135,7 @@
   <ItemGroup>
     <ClInclude Include="Bala.h" />
     <ClInclude Include="constantes.h" />
+    <ClInclude Include="Cronometro.h" />
     <ClInclude Include="Enfermero.h" />
     <ClInclude Include="Enfermo.h" />
     <ClInclude Include="GestorBalas.h" />

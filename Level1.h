@@ -4,6 +4,7 @@
 #include "Enfermero.h"
 #include "GestorEnfermo.h"
 #include "GestorBalas.h"
+#include "Cronometro.h"
 
 namespace TrabajoFinal {
 
@@ -21,6 +22,9 @@ namespace TrabajoFinal {
 	public ref class Level1 : public System::Windows::Forms::Form
 	{
 	private:
+		bool GM = false;
+
+		Cronometro* cronometro = new Cronometro();
 		Enfermero* enfermero = new Enfermero(10, 300, 10);
 		GesContagiado* g_contagiado = new GesContagiado();
 		GestorBalas* lista_balas = new GestorBalas();
@@ -29,6 +33,7 @@ namespace TrabajoFinal {
 		Bitmap^ mapa_contagiados = gcnew Bitmap("enfermo.png");
 		Bitmap^ mapa_enfermero;
 		Bitmap^ mapa_bala= gcnew Bitmap("bala.png");
+	private: System::Windows::Forms::PictureBox^ imgMuerte;
 
 		int sizeImgVida = 24;
 		int widthPantalla = this->ClientSize.Width;
@@ -47,6 +52,8 @@ namespace TrabajoFinal {
 			Random r;
 			int cantidad = r.Next(5, 20);
 			g_contagiado->creaContagiados(cantidad);
+			
+			cronometro->init();
 
 			mapa_enfermero = gcnew Bitmap(personaje +  ".png");
 			dibujaVidas();
@@ -84,8 +91,10 @@ namespace TrabajoFinal {
 			this->timer1 = (gcnew System::Windows::Forms::Timer(this->components));
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->imgVidas = (gcnew System::Windows::Forms::PictureBox());
+			this->imgMuerte = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// timer1
@@ -106,10 +115,18 @@ namespace TrabajoFinal {
 			this->imgVidas->Name = L"imgVidas";
 			this->imgVidas->TabStop = false;
 			// 
+			// imgMuerte
+			// 
+			this->imgMuerte->BackColor = System::Drawing::Color::Transparent;
+			resources->ApplyResources(this->imgMuerte, L"imgMuerte");
+			this->imgMuerte->Name = L"imgMuerte";
+			this->imgMuerte->TabStop = false;
+			// 
 			// Level1
 			// 
 			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Controls->Add(this->imgMuerte);
 			this->Controls->Add(this->imgVidas);
 			this->Controls->Add(this->pictureBox1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -121,6 +138,7 @@ namespace TrabajoFinal {
 			this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &Level1::Inicio_KeyUp);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -131,6 +149,11 @@ namespace TrabajoFinal {
 	private: System::Void Inicio_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (GM) {
+			gameOver();
+			return;
+		}
+
 		Graphics^ canvaFormulario = this->CreateGraphics();
 		BufferedGraphicsContext^ espacio = BufferedGraphicsManager::Current;
 		BufferedGraphics^ buffer = espacio->Allocate(canvaFormulario, this->ClientRectangle);
@@ -158,12 +181,18 @@ namespace TrabajoFinal {
 			}
 			lista_balas->actualizarSalida(buffer);
 		}
+
 		for (auto contagiados : g_contagiado->lista_contagiados) {
 			//chequear la colision del contagiado con el enfermero
 			if (contagiados->checkColisionEnfermero(enfermero)) {
 				enfermero->reset();
+				if (enfermero->getVidas() == 0) {
+					cronometro->fin();
+					GM = true;
+				}
 				dibujaVidas();
 				contagiados->setColisionEnfermero(false);
+				if (GM) break;
 			}
 		}
 
@@ -201,5 +230,14 @@ namespace TrabajoFinal {
 			enfermero->setDireccion(Ninguna);
 		}
 	}
+	private:
+		void gameOver() {
+			if (!this->imgMuerte->Visible) {
+				this->imgMuerte->Image = gcnew Bitmap("imgs/imgMuerte.png");
+				this->imgMuerte->Visible = true;
+			}
+			this->imgMuerte->Width+= 3;
+			this->imgMuerte->Height+= 3;
+		}
 	};
 }

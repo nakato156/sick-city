@@ -8552,7 +8552,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;pictureBox1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <data name="imgVidas.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -8592,6 +8592,30 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;imgVidas.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="imgMuerte.Location" type="System.Drawing.Point, System.Drawing">
+    <value>381, 152</value>
+  </data>
+  <data name="imgMuerte.Size" type="System.Drawing.Size, System.Drawing">
+    <value>100, 50</value>
+  </data>
+  <data name="imgMuerte.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="imgMuerte.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
+  <data name="&gt;&gt;imgMuerte.Name" xml:space="preserve">
+    <value>imgMuerte</value>
+  </data>
+  <data name="&gt;&gt;imgMuerte.Type" xml:space="preserve">
+    <value>System.Windows.Forms.PictureBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;imgMuerte.Parent" xml:space="preserve">
+    <value>$this</value>
+  </data>
+  <data name="&gt;&gt;imgMuerte.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
