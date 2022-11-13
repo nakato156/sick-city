@@ -16,9 +16,10 @@ namespace TrabajoFinal {
 	public ref class screenGameOver : public System::Windows::Forms::Form
 	{
 	public:
-		screenGameOver(std::string timepoTranscurrido)
+		screenGameOver(std::string tiempoTranscurrido)
 		{
 			InitializeComponent();
+			this->lblTimetotal->Text = gcnew System::String(tiempoTranscurrido.c_str());
 			//
 			//TODO: agregar código de constructor aquí
 			//

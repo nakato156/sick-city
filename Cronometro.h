@@ -8,7 +8,7 @@ class Tiempo {
 private:
 	int min, seg;
 	long long initTime;
-	std::string ftime;
+	std::string ftime = "";
 public:
 	Tiempo(long long segundos) {
 		initTime = segundos;
