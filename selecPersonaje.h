@@ -18,6 +18,7 @@ namespace TrabajoFinal {
 	{
 	private:
 		bool playing = true;
+		//System::String^ playerName;
 		SoundPlayer^ audio = gcnew SoundPlayer("audio-juego.wav");
 		System::String^ tipoPersonaje;
 
@@ -40,10 +41,11 @@ namespace TrabajoFinal {
 
 	private: System::Windows::Forms::Timer^ timer1;
 	public:
-		selecPersonaje(void)
+		selecPersonaje()
 		{
 			InitializeComponent();
 			this->audio->PlayLooping();
+			//playerName = _name;
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -268,7 +270,7 @@ namespace TrabajoFinal {
 		this->radioButton2->Image = modelEnf;
 	}
 	private: System::Void btnPlay_Click(System::Object^ sender, System::EventArgs^ e) {
-		Level1^ lvl1 = gcnew Level1(tipoPersonaje);
+		Level1^ lvl1 = gcnew Level1(tipoPersonaje, audio);
 		lvl1->Show();
 		this->Close();
 	}

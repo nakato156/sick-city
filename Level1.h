@@ -24,7 +24,7 @@ namespace TrabajoFinal {
 	{
 	private:
 		bool GM = false;
-
+		SoundPlayer^ audio;
 		Cronometro* cronometro = new Cronometro();
 		Enfermero* enfermero = new Enfermero(10, 300, 10);
 		GesContagiado* g_contagiado = new GesContagiado();
@@ -44,12 +44,13 @@ namespace TrabajoFinal {
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
-		Level1(System::String^ personaje)
+		Level1(System::String^ personaje, SoundPlayer^ musica)
 		{
 			InitializeComponent();
 			//
 			//TODO: agregar código de constructor aquí
 			//
+			audio = musica;
 			Random r;
 			int cantidad = r.Next(5, 20);
 			g_contagiado->creaContagiados(cantidad);
@@ -190,6 +191,7 @@ namespace TrabajoFinal {
 				if (enfermero->getVidas() == 0) {
 					cronometro->fin();
 					GM = true;
+					audio->Stop();
 				}
 				dibujaVidas();
 				contagiados->setColisionEnfermero(false);
@@ -238,12 +240,12 @@ namespace TrabajoFinal {
 				this->imgMuerte->Visible = true;
 			}
 			auto punto = this->imgMuerte->Location;
-			this->imgMuerte->Location = Point(punto.X - 2, punto.Y - 2);
-			this->imgMuerte->Width += 4;
-			this->imgMuerte->Height += 4;
+			this->imgMuerte->Location = Point(punto.X - 4, punto.Y - 4);
+			this->imgMuerte->Width += 8;
+			this->imgMuerte->Height += 8;
 			if (this->imgMuerte->Location.Y <= 0) {
-				std::cout << "segundos: " << cronometro->getTiempo() << std::endl;
-				auto screenGO = gcnew screenGameOver(cronometro->getParseTime());
+				auto curados = g_contagiado->curados;
+				auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
 				screenGO->Show();
 				this->Close();
 			}

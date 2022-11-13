@@ -12,7 +12,7 @@ private:
 public:
 	Tiempo(long long segundos) {
 		initTime = segundos;
-		min = int(seg / 60);
+		min = int(segundos / 60);
 		seg = segundos % 60;
 		ftime = std::to_string(min) + ":" + std::to_string(seg);
 	}
@@ -32,6 +32,5 @@ public:
 	}
 	long long getTiempo() { return tiempo; }
 	std::string getParseTime() { return Tiempo(tiempo); }
-
 	~Cronometro() = default;
 };

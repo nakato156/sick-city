@@ -32,6 +32,7 @@ void GesContagiado::actualizarLista() {
 		if (!valor_colision) {
 			lista_nueva.push_back(contagiado);
 		}
+		else (curados++);
 	}
 	lista_contagiados = lista_nueva;
 }

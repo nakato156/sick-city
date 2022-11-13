@@ -17,10 +17,13 @@ namespace TrabajoFinal {
 	/// </summary>
 	public ref class Reglas : public System::Windows::Forms::Form
 	{
+	private:
+		//System::String^ playerName;
 	public:
-		Reglas(void)
+		Reglas()
 		{
 			InitializeComponent();
+			//playerName = name;
 			//
 			//TODO: Add the constructor code here
 			//
@@ -63,10 +66,9 @@ namespace TrabajoFinal {
 			this->button1->AutoSize = true;
 			this->button1->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
 			this->button1->ForeColor = System::Drawing::SystemColors::ButtonHighlight;
-			this->button1->Location = System::Drawing::Point(743, 396);
-			this->button1->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
+			this->button1->Location = System::Drawing::Point(1114, 609);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(90, 41);
+			this->button1->Size = System::Drawing::Size(135, 63);
 			this->button1->TabIndex = 0;
 			this->button1->Text = L"Continuar";
 			this->button1->UseVisualStyleBackColor = false;
@@ -74,16 +76,16 @@ namespace TrabajoFinal {
 			// 
 			// Reglas
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::SystemColors::ActiveCaptionText;
-			this->ClientSize = System::Drawing::Size(866, 460);
+			this->ClientSize = System::Drawing::Size(1299, 708);
 			this->Controls->Add(this->button1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(2, 2, 2, 2);
 			this->Name = L"Reglas";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Reglas";
+			this->Load += gcnew System::EventHandler(this, &Reglas::Reglas_Load);
 			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Reglas::PintaRegla);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -118,5 +120,7 @@ namespace TrabajoFinal {
 			   auto nuevoString = gcnew String(texto.c_str());
 			   canva->DrawString(nuevoString, tipoLetraReglas, Brushes::White, (ancho/5), 35);
 		   }
-	};
+	private: System::Void Reglas_Load(System::Object^ sender, System::EventArgs^ e) {
+	}
+};
 }

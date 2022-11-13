@@ -6,6 +6,7 @@
 
 class GesContagiado {
 public:
+	int curados = 0;
 	std::vector <Contagiado*> lista_contagiados;
 	GesContagiado();
 	~GesContagiado();
