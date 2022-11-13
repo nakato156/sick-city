@@ -5,6 +5,7 @@
 #include "GestorEnfermo.h"
 #include "GestorBalas.h"
 #include "Cronometro.h"
+#include "screenGameOver.h"
 
 namespace TrabajoFinal {
 
@@ -238,8 +239,14 @@ namespace TrabajoFinal {
 			}
 			auto punto = this->imgMuerte->Location;
 			this->imgMuerte->Location = Point(punto.X - 2, punto.Y - 2);
-			this->imgMuerte->Width+= 3;
-			this->imgMuerte->Height+= 3;
+			this->imgMuerte->Width += 4;
+			this->imgMuerte->Height += 4;
+			if (this->imgMuerte->Location.Y <= 0) {
+				std::cout << "segundos: " << cronometro->getTiempo() << std::endl;
+				auto screenGO = gcnew screenGameOver(cronometro->getParseTime());
+				screenGO->Show();
+				this->Close();
+			}
 		}
 	};
 }
