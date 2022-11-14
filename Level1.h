@@ -200,15 +200,15 @@ namespace TrabajoFinal {
 			}
 		}
 		buffer->Render(canvaFormulario);
-
-		if (g_contagiado->getCantidad() == 0) {
-			Level2^ lvl2 = gcnew Level2(,audio);
-			lvl2->Show();
-			this->Close();
-		}
 		delete buffer;
 		delete canvaFormulario;
 		delete espacio;
+		/*if (g_contagiado->getCantidad() == 0) {
+			Level2^ lvl2 = gcnew Level2(,audio);
+			lvl2->Show();
+			this->Close();
+		}*/
+		
 	}
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);

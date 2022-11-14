@@ -14,6 +14,7 @@ namespace TrabajoFinal {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Media;
 
 	/// <summary>
 	/// Summary for Level2
@@ -27,15 +28,20 @@ namespace TrabajoFinal {
 		Enfermero* enfermero = new Enfermero(10, 300, 10);
 		GesContagiado* g_contagiado = new GesContagiado();
 		GestorBalas* lista_balas = new GestorBalas();
+
 		Bitmap^ mapa_contagiados = gcnew Bitmap("enfermo.png");
 		Bitmap^ mapa_enfermero;
 		Bitmap^ mapa_bala = gcnew Bitmap("bala.png");
 
-	private: System::Windows::Forms::Timer^ timer1;
-	private: System::Windows::Forms::PictureBox^ imgVidas;
+
 	private: System::Windows::Forms::PictureBox^ imgMuerte;
+
 		   int sizeImgVida = 24;
 		   int widthPantalla = this->ClientSize.Width;
+
+	private: System::Windows::Forms::Timer^ timer1;
+	private: System::Windows::Forms::PictureBox^ imgVidas;
+
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
 		Level2(System::String^ personaje, SoundPlayer^ musica)
@@ -138,7 +144,7 @@ namespace TrabajoFinal {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(1292, 525);
+			this->ClientSize = System::Drawing::Size(1312, 605);
 			this->Controls->Add(this->imgMuerte);
 			this->Controls->Add(this->imgVidas);
 			this->Controls->Add(this->pictureBox1);
@@ -147,6 +153,8 @@ namespace TrabajoFinal {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Level2";
 			this->Load += gcnew System::EventHandler(this, &Level2::Level2_Load);
+			this->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Level2::Level2_KeyDown);
+			this->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &Level2::Level2_KeyUp);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->EndInit();
@@ -154,10 +162,16 @@ namespace TrabajoFinal {
 
 		}
 #pragma endregion
+		private: System::Void Level2_Load(System::Object^ sender, System::EventArgs^ e) {
+		}
 		private: void dibujaVidas() {
 			this->imgVidas->Width = enfermero->getVidas() * sizeImgVida;
 		}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (GM) {
+			gameOver();
+			return;
+		}
 		Graphics^ canvaFormulario = this->CreateGraphics();
 		BufferedGraphicsContext^ espacio = BufferedGraphicsManager::Current;
 		BufferedGraphics^ buffer = espacio->Allocate(canvaFormulario, this->ClientRectangle);
@@ -166,12 +180,88 @@ namespace TrabajoFinal {
 		int ancho = buffer->Graphics->VisibleClipBounds.Width;
 		int alto = buffer->Graphics->VisibleClipBounds.Height;
 		buffer->Graphics->DrawImage(pictureBox1->Image, 0, 0, ancho, alto);
+		//movimientos
+		enfermero->mueveEnfermero(buffer, mapa_enfermero);
+		lista_balas->animar(buffer, mapa_bala);
+		g_contagiado->moverContagiados(buffer, mapa_contagiados, enfermero);
+
+		//chequear colisiones
+		for (auto bala : lista_balas->lista) {
+			for (auto contagiado : g_contagiado->lista_contagiados)
+			{
+				//chequear colision de la bala con los enfermos
+				if (contagiado->checkColision(bala)) {
+					bala->setColision(true);			//si hay colision, cambiar el estado de la bala
+					g_contagiado->actualizarLista();	//eliminar el contagiado colisionado
+					lista_balas->actualizarLista();		//eliminar la bala que colisiono
+				}
+			}
+			lista_balas->actualizarSalida(buffer);
+		}
+
+		for (auto contagiados : g_contagiado->lista_contagiados) {
+			//chequear la colision del contagiado con el enfermero
+			if (contagiados->checkColisionEnfermero(enfermero)) {
+				enfermero->reset();
+				if (enfermero->getVidas() == 0) {
+					cronometro->fin();
+					GM = true;
+					audio->Stop();
+				}
+				dibujaVidas();
+				contagiados->setColisionEnfermero(false);
+				if (GM) break;
+			}
+		}
 		buffer->Render(canvaFormulario);
 		delete buffer;
 		delete canvaFormulario;
 		delete espacio;
 	}
-	private: System::Void Level2_Load(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void Level2_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);
+		switch (e->KeyCode) {
+		case Keys::Space:
+			enfermero->setDireccion(Disparar);
+			lista_balas->addBala(new Bala(40, 10, enfermero, 30));
+			break;
+		case Keys::Left:
+			enfermero->setDireccion(Izquierda);
+			break;
+		case Keys::Right:
+			enfermero->setDireccion(Derecha);
+			break;
+		case Keys::Up:
+			enfermero->setDireccion(Arriba);
+			break;
+		case Keys::Down:
+			enfermero->setDireccion(Abajo);
+			break;
+		}
 	}
-	};
+private: System::Void Level2_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
+	auto key = e->KeyCode;
+	if (key == Keys::ControlKey) enfermero->resetVelocidad();
+	else if (key == Keys::Right || key == Keys::Left || key == Keys::Up || key == Keys::Down) {
+		enfermero->setDireccion(Ninguna);
+	}
+}
+	   private:
+		   void gameOver() {
+			   if (!this->imgMuerte->Visible) {
+				   this->imgMuerte->Image = gcnew Bitmap("imgs/imgMuerte.png");
+				   this->imgMuerte->Visible = true;
+			   }
+			   auto punto = this->imgMuerte->Location;
+			   this->imgMuerte->Location = Point(punto.X - 4, punto.Y - 4);
+			   this->imgMuerte->Width += 8;
+			   this->imgMuerte->Height += 8;
+			   if (this->imgMuerte->Location.Y <= 0) {
+				   auto curados = g_contagiado->curados;
+				   auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
+				   screenGO->Show();
+				   this->Close();
+			   }
+		   }
+};
 }
