@@ -14,4 +14,5 @@ public:
 	void creaContagiados(int cantidad);
 	void moverContagiados(System::Drawing::BufferedGraphics^ buffer, System::Drawing::Bitmap^ bmp, Enfermero*);
 	void actualizarLista();
+	int getCantidad();
 };

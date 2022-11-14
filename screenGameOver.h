@@ -1,4 +1,5 @@
 #pragma once
+//#include "Inicio.h"
 #include <string>
 namespace TrabajoFinal {
 
@@ -161,10 +162,16 @@ namespace TrabajoFinal {
 #pragma endregion
 	private: System::Void pantallaFinal_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
-	private: System::Void btnBackMenu_Click(System::Object^ sender, System::EventArgs^ e) {
+	private: System::Void btnBackMenu_Click(System::Object^ sender, System::EventArgs^ e) { 
+		//cuando se aprete el boton de menu, este formulario se cierra y el formulario inicial vuelve a ejecutarse
+		//Inicio^ inicio = gcnew Inicio();
+		this->Hide();
+		//inicio->Show();
 		//auto menu = gcnew selecPersonaje(playerNombre);
 	}
 	private: System::Void btnAgain_Click(System::Object^ sender, System::EventArgs^ e) {
+		//cuando se aprete el boton de volver a iniciar, este formulario se cierrra y el formulario de level1 vuelve a ejecutarse
+		this->Visible = false;
 	}
 private: System::Void screenGameOver_Load(System::Object^ sender, System::EventArgs^ e) {
 }

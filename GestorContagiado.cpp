@@ -18,7 +18,6 @@ void GesContagiado::creaContagiados(int cantidad) {
 	}
 	_sleep(50);
 }
-
 void GesContagiado::moverContagiados(BufferedGraphics^ buffer, Bitmap^ bmp, Enfermero* enf) {
 	for (int i = 0; i < lista_contagiados.size(); i++) {
 		lista_contagiados[i]->mueveContagiado(buffer, bmp, enf);
@@ -35,4 +34,7 @@ void GesContagiado::actualizarLista() {
 		else (curados++);
 	}
 	lista_contagiados = lista_nueva;
+}
+int GesContagiado::getCantidad() {
+	return lista_contagiados.size();
 }

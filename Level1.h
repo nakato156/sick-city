@@ -1,4 +1,5 @@
 #pragma once
+#include "Level2.h"
 #include<conio.h>
 #include <iostream>
 #include "Enfermero.h"
@@ -176,7 +177,7 @@ namespace TrabajoFinal {
 			{
 				//chequear colision de la bala con los enfermos
 				if (contagiado->checkColision(bala)) {
-					bala->setColision(true);			//si hay colision, cambiar el estaod de la bala
+					bala->setColision(true);			//si hay colision, cambiar el estado de la bala
 					g_contagiado->actualizarLista();	//eliminar el contagiado colisionado
 					lista_balas->actualizarLista();		//eliminar la bala que colisiono
 				}
@@ -198,8 +199,13 @@ namespace TrabajoFinal {
 				if (GM) break;
 			}
 		}
-
 		buffer->Render(canvaFormulario);
+
+		if (g_contagiado->getCantidad() == 0) {
+			Level2^ lvl2 = gcnew Level2(,audio);
+			lvl2->Show();
+			this->Close();
+		}
 		delete buffer;
 		delete canvaFormulario;
 		delete espacio;

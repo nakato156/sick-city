@@ -8523,15 +8523,12 @@
 </value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 161</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>598, 248</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 32</value>
+    <value>100, 49</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
@@ -8574,10 +8571,13 @@
 </value>
   </data>
   <data name="imgVidas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 24</value>
+    <value>15, 37</value>
+  </data>
+  <data name="imgVidas.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="imgVidas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 23</value>
+    <value>111, 35</value>
   </data>
   <data name="imgVidas.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -8595,10 +8595,13 @@
     <value>1</value>
   </data>
   <data name="imgMuerte.Location" type="System.Drawing.Point, System.Drawing">
-    <value>381, 152</value>
+    <value>441, 248</value>
+  </data>
+  <data name="imgMuerte.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="imgMuerte.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 50</value>
+    <value>150, 77</value>
   </data>
   <data name="imgMuerte.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -8622,10 +8625,13 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>9, 20</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>875, 393</value>
+    <value>1312, 605</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
