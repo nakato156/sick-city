@@ -30,7 +30,7 @@ namespace TrabajoFinal {
 
 		SoundPlayer^ audio;
 		Cronometro* cronometro = new Cronometro();
-		Enfermero* enfermero = new Enfermero(10, 300, 10);
+		Enfermero* enfermero = new Enfermero(10, 300, 10, 5);
 		GesContagiado* g_contagiado = new GesContagiado();
 		GestorBalas* lista_balas = new GestorBalas();
 		
@@ -61,7 +61,7 @@ namespace TrabajoFinal {
 			audio = musica;
 			tipo_personaje = personaje;
 			int cantidad = Random().Next(5, 20);
-			g_contagiado->creaContagiados(cantidad);
+			g_contagiado->creaContagiados(cantidad, 8);
 			
 			cronometro->init();
 
@@ -236,6 +236,7 @@ namespace TrabajoFinal {
 		delete buffer;
 		delete canvaFormulario;
 		delete espacio;
+<<<<<<< HEAD
 
 		if (g_contagiado->getCantidad() == 0) {
 			Level2^ lvl2 = gcnew Level2(tipo_personaje, audio);
@@ -243,6 +244,8 @@ namespace TrabajoFinal {
 			lvl2->ShowDialog(this);
 			this->Close();
 		}
+=======
+>>>>>>> 0fdea866e2dcbd6c341335d6d66a3452e0c82350
 	}
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);

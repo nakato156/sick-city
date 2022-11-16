@@ -4,10 +4,10 @@
 using namespace std;
 using namespace System::Drawing;
 
-Enfermero::Enfermero(int posX, int posY, int velocidad){
+Enfermero::Enfermero(int posX, int posY, int velocidad, int vidas){
 	this->posX = posX;
 	this->posY = posY;
-
+	this->vidas = vidas;
 	this->velocidad = velocidad;
 	velocidadNormal = velocidad;
 	
@@ -17,7 +17,6 @@ Enfermero::Enfermero(int posX, int posY, int velocidad){
 	alto = 230;		//falta definir tras sprite
 	ancho = 210;		//falta definir tras sprite
 	
-	vidas = 5;
 	
 	ultimatecla = Derecha;
 	direccion = Ninguna;

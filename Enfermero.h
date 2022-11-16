@@ -7,7 +7,7 @@ private:
 	Direcciones ultimatecla;
 	Direcciones direccion;
 public:
-	Enfermero(int posX, int posY, int velocidad);
+	Enfermero(int posX, int posY, int velocidad, int vidas);
 	~Enfermero();
 	void setDireccion(Direcciones _direccion);
 	int getX();	
@@ -15,7 +15,6 @@ public:
 	int getAncho();
 	int getAlto();
 	int getVidas();
-
 	void addVelocidad(int);
 	void resetVelocidad();
 
