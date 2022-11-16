@@ -1,6 +1,7 @@
 #pragma once
 #include "Level1.h"
 #include "Level2.h"
+
 namespace TrabajoFinal {
 
 	using namespace System;
@@ -18,7 +19,6 @@ namespace TrabajoFinal {
 	{
 	private:
 		bool playing = true;
-		//System::String^ playerName;
 		SoundPlayer^ audio = gcnew SoundPlayer("audio-juego.wav");
 		System::String^ tipoPersonaje;
 
@@ -38,6 +38,8 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ btnPlay;
 	private: System::Windows::Forms::Button^ button3;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
 
 
 	private: System::Windows::Forms::Timer^ timer1;
@@ -46,7 +48,6 @@ namespace TrabajoFinal {
 		{
 			InitializeComponent();
 			this->audio->PlayLooping();
-			//playerName = _name;
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -90,6 +91,8 @@ namespace TrabajoFinal {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->btnPlay = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// timer1
@@ -103,10 +106,9 @@ namespace TrabajoFinal {
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 48, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->label1->ForeColor = System::Drawing::Color::Lime;
-			this->label1->Location = System::Drawing::Point(346, 43);
-			this->label1->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label1->Location = System::Drawing::Point(231, 36);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(522, 125);
+			this->label1->Size = System::Drawing::Size(348, 81);
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"SickCity";
 			this->label1->TextAlign = System::Drawing::ContentAlignment::TopCenter;
@@ -116,11 +118,10 @@ namespace TrabajoFinal {
 			this->label2->BackColor = System::Drawing::Color::Transparent;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20.25F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->ForeColor = System::Drawing::Color::Yellow;
-			this->label2->Location = System::Drawing::Point(338, 158);
-			this->label2->Margin = System::Windows::Forms::Padding(4, 0, 4, 0);
+			this->label2->ForeColor = System::Drawing::Color::Gold;
+			this->label2->Location = System::Drawing::Point(225, 103);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(500, 72);
+			this->label2->Size = System::Drawing::Size(333, 47);
 			this->label2->TabIndex = 7;
 			this->label2->Text = L"Seleccione su personaje";
 			this->label2->TextAlign = System::Drawing::ContentAlignment::MiddleCenter;
@@ -134,10 +135,9 @@ namespace TrabajoFinal {
 			this->radioButton1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 12));
 			this->radioButton1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"radioButton1.Image")));
 			this->radioButton1->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
-			this->radioButton1->Location = System::Drawing::Point(198, 274);
-			this->radioButton1->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->radioButton1->Location = System::Drawing::Point(132, 178);
 			this->radioButton1->Name = L"radioButton1";
-			this->radioButton1->Size = System::Drawing::Size(322, 283);
+			this->radioButton1->Size = System::Drawing::Size(215, 184);
 			this->radioButton1->TabIndex = 8;
 			this->radioButton1->TabStop = true;
 			this->radioButton1->Text = L"ENFERMERA";
@@ -157,10 +157,9 @@ namespace TrabajoFinal {
 			this->radioButton2->ForeColor = System::Drawing::Color::Black;
 			this->radioButton2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"radioButton2.Image")));
 			this->radioButton2->ImageAlign = System::Drawing::ContentAlignment::TopCenter;
-			this->radioButton2->Location = System::Drawing::Point(664, 272);
-			this->radioButton2->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->radioButton2->Location = System::Drawing::Point(443, 177);
 			this->radioButton2->Name = L"radioButton2";
-			this->radioButton2->Size = System::Drawing::Size(357, 285);
+			this->radioButton2->Size = System::Drawing::Size(238, 185);
 			this->radioButton2->TabIndex = 9;
 			this->radioButton2->TabStop = true;
 			this->radioButton2->Text = L"ENFERMERO";
@@ -172,24 +171,24 @@ namespace TrabajoFinal {
 			// 
 			// button1
 			// 
+			this->button1->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->button1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button1.Image")));
-			this->button1->Location = System::Drawing::Point(18, 43);
-			this->button1->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->button1->Location = System::Drawing::Point(14, 36);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(45, 43);
+			this->button1->Size = System::Drawing::Size(30, 28);
 			this->button1->TabIndex = 10;
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &selecPersonaje::button1_Click);
 			// 
 			// button2
 			// 
+			this->button2->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->button2->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"button2.Image")));
-			this->button2->Location = System::Drawing::Point(90, 43);
-			this->button2->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->button2->Location = System::Drawing::Point(62, 36);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(50, 43);
+			this->button2->Size = System::Drawing::Size(33, 28);
 			this->button2->TabIndex = 11;
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &selecPersonaje::button2_Click);
@@ -200,10 +199,9 @@ namespace TrabajoFinal {
 			this->btnPlay->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->btnPlay->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnPlay->ForeColor = System::Drawing::Color::White;
-			this->btnPlay->Location = System::Drawing::Point(103, 636);
-			this->btnPlay->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->btnPlay->Location = System::Drawing::Point(69, 413);
 			this->btnPlay->Name = L"btnPlay";
-			this->btnPlay->Size = System::Drawing::Size(166, 66);
+			this->btnPlay->Size = System::Drawing::Size(111, 43);
 			this->btnPlay->TabIndex = 12;
 			this->btnPlay->Text = L"Jugar Nivel 1\r\n";
 			this->btnPlay->UseVisualStyleBackColor = false;
@@ -215,21 +213,32 @@ namespace TrabajoFinal {
 			this->button3->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->button3->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->button3->ForeColor = System::Drawing::Color::White;
-			this->button3->Location = System::Drawing::Point(958, 636);
-			this->button3->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->button3->Location = System::Drawing::Point(639, 413);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(166, 66);
+			this->button3->Size = System::Drawing::Size(111, 43);
 			this->button3->TabIndex = 13;
 			this->button3->Text = L"Jugar Nivel 2";
 			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &selecPersonaje::button3_Click);
 			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+				static_cast<System::Int32>(static_cast<System::Byte>(64)));
+			this->pictureBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+			this->pictureBox1->Location = System::Drawing::Point(-2, 0);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(821, 30);
+			this->pictureBox1->TabIndex = 14;
+			this->pictureBox1->TabStop = false;
+			// 
 			// selecPersonaje
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
-			this->ClientSize = System::Drawing::Size(1224, 734);
+			this->ClientSize = System::Drawing::Size(816, 477);
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button2);
@@ -240,11 +249,11 @@ namespace TrabajoFinal {
 			this->Controls->Add(this->radioButton1);
 			this->ForeColor = System::Drawing::Color::Black;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
-			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->Name = L"selecPersonaje";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"selecPersonaje";
 			this->Load += gcnew System::EventHandler(this, &selecPersonaje::selecPersonaje_Load);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -295,15 +304,19 @@ namespace TrabajoFinal {
 	private: System::Void radioButton2_MouseLeave(System::Object^ sender, System::EventArgs^ e) {
 		this->radioButton2->Image = modelEnf;
 	}
+	
 	private: System::Void btnPlay_Click(System::Object^ sender, System::EventArgs^ e) {
-		Level1^ lvl1 = gcnew Level1(tipoPersonaje, audio);
-		lvl1->Show();
-		this->Close();
+		auto lvl1 = gcnew Level1(tipoPersonaje, audio);
+		this->Hide();
+		lvl1->ShowDialog();
+		this->Visible = true;
 	}
+
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		Level2^ lvl2 = gcnew Level2(tipoPersonaje, audio);
-		lvl2->Show();
-		this->Close();
+		auto lvl2 = gcnew Level2(tipoPersonaje, audio);
+		this->Hide();
+		lvl2->ShowDialog();
+		this->Visible = true;
 	}
 };
 }

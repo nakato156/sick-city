@@ -24,7 +24,8 @@ namespace TrabajoFinal {
 	public ref class Level1 : public System::Windows::Forms::Form
 	{
 	private:
-		bool GM = false;
+		bool GM = false, showForm = false, showingControlPanel = false;
+
 		SoundPlayer^ audio;
 		Cronometro* cronometro = new Cronometro();
 		Enfermero* enfermero = new Enfermero(10, 300, 10);
@@ -39,9 +40,12 @@ namespace TrabajoFinal {
 
 		int sizeImgVida = 24;
 		int widthPantalla = this->ClientSize.Width;
+		System::String^ tipo_personaje;
 
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::PictureBox^ imgVidas;
+	private: System::Windows::Forms::Panel^ controlPanel;
+	private: System::Windows::Forms::Button^ btnBack;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
@@ -52,8 +56,8 @@ namespace TrabajoFinal {
 			//TODO: agregar código de constructor aquí
 			//
 			audio = musica;
-			Random r;
-			int cantidad = r.Next(5, 20);
+			tipo_personaje = personaje;
+			int cantidad = Random().Next(5, 20);
 			g_contagiado->creaContagiados(cantidad);
 			
 			cronometro->init();
@@ -95,9 +99,12 @@ namespace TrabajoFinal {
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->imgVidas = (gcnew System::Windows::Forms::PictureBox());
 			this->imgMuerte = (gcnew System::Windows::Forms::PictureBox());
+			this->controlPanel = (gcnew System::Windows::Forms::Panel());
+			this->btnBack = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->BeginInit();
+			this->controlPanel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// timer1
@@ -125,10 +132,27 @@ namespace TrabajoFinal {
 			this->imgMuerte->Name = L"imgMuerte";
 			this->imgMuerte->TabStop = false;
 			// 
+			// controlPanel
+			// 
+			this->controlPanel->BackColor = System::Drawing::Color::Black;
+			this->controlPanel->Controls->Add(this->btnBack);
+			this->controlPanel->ForeColor = System::Drawing::Color::White;
+			resources->ApplyResources(this->controlPanel, L"controlPanel");
+			this->controlPanel->Name = L"controlPanel";
+			// 
+			// btnBack
+			// 
+			this->btnBack->BackColor = System::Drawing::Color::DarkRed;
+			this->btnBack->Cursor = System::Windows::Forms::Cursors::Hand;
+			resources->ApplyResources(this->btnBack, L"btnBack");
+			this->btnBack->Name = L"btnBack";
+			this->btnBack->UseVisualStyleBackColor = false;
+			// 
 			// Level1
 			// 
 			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Controls->Add(this->controlPanel);
 			this->Controls->Add(this->imgMuerte);
 			this->Controls->Add(this->imgVidas);
 			this->Controls->Add(this->pictureBox1);
@@ -142,6 +166,7 @@ namespace TrabajoFinal {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->EndInit();
+			this->controlPanel->ResumeLayout(false);
 			this->ResumeLayout(false);
 
 		}
@@ -203,12 +228,12 @@ namespace TrabajoFinal {
 		delete buffer;
 		delete canvaFormulario;
 		delete espacio;
-		/*if (g_contagiado->getCantidad() == 0) {
-			Level2^ lvl2 = gcnew Level2(,audio);
-			lvl2->Show();
+		if (g_contagiado->getCantidad() == 0) {
+			Level2^ lvl2 = gcnew Level2(tipo_personaje, audio);
+			this->Hide();
+			lvl2->ShowDialog(this);
 			this->Close();
-		}*/
-		
+		}
 	}
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);
@@ -229,6 +254,9 @@ namespace TrabajoFinal {
 		case Keys::Down:
 			enfermero->setDireccion(Abajo);
 			break;
+		case Keys::Escape:
+			showControlPanel(); 
+			break;
 		}
 
 	}
@@ -239,21 +267,47 @@ namespace TrabajoFinal {
 			enfermero->setDireccion(Ninguna);
 		}
 	}
+	
+	template<class T>
+	void abrirForm(T nuevoForm) {
+		if (this->contenedor->Controls->Count > 0) this->contenedor->Controls->RemoveAt(0);
+
+		nuevoForm->TopLevel = false;
+		nuevoForm->Dock = DockStyle::Fill;
+
+		this->contenedor->Controls->Add(nuevoForm);
+		this->contenedor->Tag = nuevoForm;
+		this->contenedor->Visible = true;
+		nuevoForm->Show();
+		//this->contenedor->Visible = false;
+	}
+
 	private:
+		void showControlPanel() {
+			if (!showingControlPanel) {
+				auto punto = this->controlPanel->Location;
+				this->controlPanel->Location = Point(punto.X, punto.Y - 10);
+				if (punto.Y - 10 >= 0) showingControlPanel = true;
+			}
+		}
 		void gameOver() {
 			if (!this->imgMuerte->Visible) {
 				this->imgMuerte->Image = gcnew Bitmap("imgs/imgMuerte.png");
 				this->imgMuerte->Visible = true;
 			}
-			auto punto = this->imgMuerte->Location;
-			this->imgMuerte->Location = Point(punto.X - 4, punto.Y - 4);
-			this->imgMuerte->Width += 8;
-			this->imgMuerte->Height += 8;
-			if (this->imgMuerte->Location.Y <= 0) {
+			else if (this->imgMuerte->Location.Y > 0) {
+				auto punto = this->imgMuerte->Location;
+				this->imgMuerte->Location = Point(punto.X - 4, punto.Y - 4);
+				this->imgMuerte->Width += 8;
+				this->imgMuerte->Height += 8;
+			}
+			if (this->imgMuerte->Location.Y <= 0 && !showForm) {
+				showForm = true;
 				auto curados = g_contagiado->curados;
 				auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
-				screenGO->Show();
-				this->Close();
+				if(screenGO->ShowDialog(this) == System::Windows::Forms::DialogResult::OK) 
+					this->Close();
+				delete screenGO;
 			}
 		}
 	};

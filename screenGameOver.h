@@ -15,15 +15,12 @@ namespace TrabajoFinal {
 	/// </summary>
 	public ref class screenGameOver : public System::Windows::Forms::Form
 	{
-	private:
-		//System::String^ playerNombre;
 	public:
 		screenGameOver(std::string tiempoTranscurrido, int curados)
 		{
 			InitializeComponent();
 			this->lblTimetotal->Text = gcnew System::String(tiempoTranscurrido.c_str());
 			this->lblInfcCurados->Text = gcnew System::String(std::to_string(curados).c_str());
-			//playerNombre = nombre;
 			//
 			//TODO: agregar código de constructor aquí
 			//
@@ -74,7 +71,8 @@ namespace TrabajoFinal {
 			// 
 			// btnBackMenu
 			// 
-			this->btnBackMenu->BackColor = System::Drawing::Color::Transparent;
+			this->btnBackMenu->BackColor = System::Drawing::Color::DarkRed;
+			this->btnBackMenu->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnBackMenu->Location = System::Drawing::Point(740, 351);
 			this->btnBackMenu->Name = L"btnBackMenu";
 			this->btnBackMenu->Size = System::Drawing::Size(123, 30);
@@ -85,7 +83,8 @@ namespace TrabajoFinal {
 			// 
 			// btnAgain
 			// 
-			this->btnAgain->BackColor = System::Drawing::Color::Transparent;
+			this->btnAgain->BackColor = System::Drawing::Color::DarkRed;
+			this->btnAgain->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnAgain->Location = System::Drawing::Point(594, 351);
 			this->btnAgain->Name = L"btnAgain";
 			this->btnAgain->Size = System::Drawing::Size(123, 30);
@@ -101,7 +100,7 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->label1->Location = System::Drawing::Point(30, 79);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(355, 33);
+			this->label1->Size = System::Drawing::Size(230, 22);
 			this->label1->TabIndex = 2;
 			this->label1->Text = L"Tiempo Transcurrido:";
 			// 
@@ -112,7 +111,7 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->lblTimetotal->Location = System::Drawing::Point(266, 79);
 			this->lblTimetotal->Name = L"lblTimetotal";
-			this->lblTimetotal->Size = System::Drawing::Size(32, 33);
+			this->lblTimetotal->Size = System::Drawing::Size(21, 22);
 			this->lblTimetotal->TabIndex = 3;
 			this->lblTimetotal->Text = L"0";
 			// 
@@ -123,7 +122,7 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->label2->Location = System::Drawing::Point(30, 127);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(338, 33);
+			this->label2->Size = System::Drawing::Size(219, 22);
 			this->label2->TabIndex = 4;
 			this->label2->Text = L"Infectados curados:";
 			// 
@@ -134,7 +133,7 @@ namespace TrabajoFinal {
 				static_cast<System::Byte>(0)));
 			this->lblInfcCurados->Location = System::Drawing::Point(266, 127);
 			this->lblInfcCurados->Name = L"lblInfcCurados";
-			this->lblInfcCurados->Size = System::Drawing::Size(32, 33);
+			this->lblInfcCurados->Size = System::Drawing::Size(21, 22);
 			this->lblInfcCurados->TabIndex = 5;
 			this->lblInfcCurados->Text = L"0";
 			// 
@@ -151,9 +150,11 @@ namespace TrabajoFinal {
 			this->Font = (gcnew System::Drawing::Font(L"Courier New", 9.75F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
 			this->ForeColor = System::Drawing::Color::White;
+			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"screenGameOver";
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Load += gcnew System::EventHandler(this, &screenGameOver::screenGameOver_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -164,14 +165,13 @@ namespace TrabajoFinal {
 	}
 	private: System::Void btnBackMenu_Click(System::Object^ sender, System::EventArgs^ e) { 
 		//cuando se aprete el boton de menu, este formulario se cierra y el formulario inicial vuelve a ejecutarse
-		//Inicio^ inicio = gcnew Inicio();
-		this->Hide();
-		//inicio->Show();
-		//auto menu = gcnew selecPersonaje(playerNombre);
+		this->DialogResult = System::Windows::Forms::DialogResult::OK;
+		this->Close();
 	}
 	private: System::Void btnAgain_Click(System::Object^ sender, System::EventArgs^ e) {
 		//cuando se aprete el boton de volver a iniciar, este formulario se cierrra y el formulario de level1 vuelve a ejecutarse
-		this->Visible = false;
+		this->DialogResult = System::Windows::Forms::DialogResult::Retry;
+		this->Close();
 	}
 private: System::Void screenGameOver_Load(System::Object^ sender, System::EventArgs^ e) {
 }
