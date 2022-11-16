@@ -22,8 +22,6 @@ namespace TrabajoFinal {
 		SoundPlayer^ audio = gcnew SoundPlayer("audio-juego.wav");
 		System::String^ tipoPersonaje;
 
-		Bitmap^ fondo = gcnew Bitmap("fondo.png");
-
 		Bitmap^ modelEnfra = gcnew Bitmap("imgs/modelEnfra.png");
 		Bitmap^ modelEnfraAtc = gcnew Bitmap("imgs/modelEnfraAct.png");
 		Bitmap^ modelEnf = gcnew Bitmap("imgs/modelEnf.png");
