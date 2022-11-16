@@ -25,7 +25,7 @@ namespace TrabajoFinal {
 		bool GM = false;
 		SoundPlayer^ audio;
 		Cronometro* cronometro = new Cronometro();
-		Enfermero* enfermero = new Enfermero(10, 300, 10);
+		Enfermero* enfermero = new Enfermero(10, 300, 10, 3);
 		GesContagiado* g_contagiado = new GesContagiado();
 		GestorBalas* lista_balas = new GestorBalas();
 
@@ -41,6 +41,7 @@ namespace TrabajoFinal {
 
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::PictureBox^ imgVidas;
+	private: System::Windows::Forms::Label^ label1;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
@@ -52,8 +53,8 @@ namespace TrabajoFinal {
 			//
 			audio = musica;
 			Random r;
-			int cantidad = r.Next(5, 20);
-			g_contagiado->creaContagiados(cantidad);
+			int cantidad = r.Next(10, 25);
+			g_contagiado->creaContagiados(cantidad, 12);
 
 			cronometro->init();
 
@@ -95,6 +96,7 @@ namespace TrabajoFinal {
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->imgVidas = (gcnew System::Windows::Forms::PictureBox());
 			this->imgMuerte = (gcnew System::Windows::Forms::PictureBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->BeginInit();
@@ -140,11 +142,21 @@ namespace TrabajoFinal {
 			this->imgMuerte->TabStop = false;
 			this->imgMuerte->Visible = false;
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(490, 30);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(51, 20);
+			this->label1->TabIndex = 3;
+			this->label1->Text = L"label1";
+			// 
 			// Level2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1312, 605);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->imgMuerte);
 			this->Controls->Add(this->imgVidas);
 			this->Controls->Add(this->pictureBox1);
@@ -159,6 +171,7 @@ namespace TrabajoFinal {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -172,6 +185,8 @@ namespace TrabajoFinal {
 			gameOver();
 			return;
 		}
+		label1->BackColor = Color::Red;
+		label1->Text = "NIVEL 2";
 		Graphics^ canvaFormulario = this->CreateGraphics();
 		BufferedGraphicsContext^ espacio = BufferedGraphicsManager::Current;
 		BufferedGraphics^ buffer = espacio->Allocate(canvaFormulario, this->ClientRectangle);

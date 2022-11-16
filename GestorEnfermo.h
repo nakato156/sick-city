@@ -11,7 +11,7 @@ public:
 	GesContagiado();
 	~GesContagiado();
 	void agregaContagiado(Contagiado* oc);
-	void creaContagiados(int cantidad);
+	void creaContagiados(int cantidad, int velocidad);
 	void moverContagiados(System::Drawing::BufferedGraphics^ buffer, System::Drawing::Bitmap^ bmp, Enfermero*);
 	void actualizarLista();
 	int getCantidad();

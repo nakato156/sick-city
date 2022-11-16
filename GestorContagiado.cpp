@@ -10,10 +10,10 @@ GesContagiado::~GesContagiado() = default;
 void GesContagiado::agregaContagiado(Contagiado* oc) {
 	lista_contagiados.push_back(oc);
 }
-void GesContagiado::creaContagiados(int cantidad) {
+void GesContagiado::creaContagiados(int cantidad, int velocidad) {
 	Contagiado* oc;
 	for (int i = 0; i < cantidad; i++) {
-		oc = new Contagiado(WIDTH_VENTANA + rand() % (WIDTH_VENTANA / 2), 8);
+		oc = new Contagiado(WIDTH_VENTANA + rand() % (WIDTH_VENTANA / 2), velocidad);
 		lista_contagiados.push_back(oc);
 	}
 	_sleep(50);
