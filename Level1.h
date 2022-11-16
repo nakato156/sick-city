@@ -237,12 +237,12 @@ namespace TrabajoFinal {
 		delete canvaFormulario;
 		delete espacio;
 
-		if (g_contagiado->getCantidad() == 0) {
+		/*if (g_contagiado->getCantidad() == 0) {
 			Level2^ lvl2 = gcnew Level2(tipo_personaje, audio);
 			this->Hide();
 			lvl2->ShowDialog(this);
 			this->Close();
-		}
+		}*/
 	}
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);
