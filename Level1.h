@@ -24,7 +24,9 @@ namespace TrabajoFinal {
 	public ref class Level1 : public System::Windows::Forms::Form
 	{
 	private:
-		bool GM = false, showForm = false, showingControlPanel = false;
+		bool GM = false;
+		bool showForm = false, mostrarCP = true, CPVisible = false;
+		int velCP = 30;
 
 		SoundPlayer^ audio;
 		Cronometro* cronometro = new Cronometro();
@@ -46,6 +48,7 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::PictureBox^ imgVidas;
 	private: System::Windows::Forms::Panel^ controlPanel;
 	private: System::Windows::Forms::Button^ btnBack;
+	private: System::Windows::Forms::Timer^ animaciones;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
@@ -101,6 +104,7 @@ namespace TrabajoFinal {
 			this->imgMuerte = (gcnew System::Windows::Forms::PictureBox());
 			this->controlPanel = (gcnew System::Windows::Forms::Panel());
 			this->btnBack = (gcnew System::Windows::Forms::Button());
+			this->animaciones = (gcnew System::Windows::Forms::Timer(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->BeginInit();
@@ -148,6 +152,10 @@ namespace TrabajoFinal {
 			this->btnBack->Name = L"btnBack";
 			this->btnBack->UseVisualStyleBackColor = false;
 			// 
+			// animaciones
+			// 
+			this->animaciones->Tick += gcnew System::EventHandler(this, &Level1::animaciones_Tick);
+			// 
 			// Level1
 			// 
 			resources->ApplyResources(this, L"$this");
@@ -156,6 +164,7 @@ namespace TrabajoFinal {
 			this->Controls->Add(this->imgMuerte);
 			this->Controls->Add(this->imgVidas);
 			this->Controls->Add(this->pictureBox1);
+			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
@@ -177,10 +186,8 @@ namespace TrabajoFinal {
 	private: System::Void Inicio_Load(System::Object^ sender, System::EventArgs^ e) {
 	}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-		if (GM) {
-			gameOver();
-			return;
-		}
+		if (GM) return gameOver();
+		else if (CPVisible) return;
 
 		Graphics^ canvaFormulario = this->CreateGraphics();
 		BufferedGraphicsContext^ espacio = BufferedGraphicsManager::Current;
@@ -189,7 +196,7 @@ namespace TrabajoFinal {
 		
 		int ancho = buffer->Graphics->VisibleClipBounds.Width;
 		int alto = buffer->Graphics->VisibleClipBounds.Height;
-		buffer->Graphics->DrawImage(pictureBox1->Image, 0, 0,ancho, alto);
+		buffer->Graphics->DrawImage(pictureBox1->Image, 0, 0, ancho, alto);
 
 		//movimientos
 		enfermero->mueveEnfermero(buffer, mapa_enfermero);
@@ -224,10 +231,18 @@ namespace TrabajoFinal {
 				if (GM) break;
 			}
 		}
+
 		buffer->Render(canvaFormulario);
 		delete buffer;
 		delete canvaFormulario;
 		delete espacio;
+
+		if (g_contagiado->getCantidad() == 0) {
+			Level2^ lvl2 = gcnew Level2(tipo_personaje, audio);
+			this->Hide();
+			lvl2->ShowDialog(this);
+			this->Close();
+		}
 	}
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);
@@ -248,9 +263,6 @@ namespace TrabajoFinal {
 		case Keys::Down:
 			enfermero->setDireccion(Abajo);
 			break;
-		case Keys::Escape:
-			showControlPanel(); 
-			break;
 		}
 
 	}
@@ -259,6 +271,10 @@ namespace TrabajoFinal {
 		if(key == Keys::ControlKey) enfermero->resetVelocidad();
 		else if (key == Keys::Right || key == Keys::Left || key == Keys::Up || key == Keys::Down) {
 			enfermero->setDireccion(Ninguna);
+		}
+		else if (key == Keys::Escape) {
+			//mostrarCP = !mostrarCP;
+			animaciones->Enabled = true;
 		}
 	}
 	
@@ -278,12 +294,27 @@ namespace TrabajoFinal {
 
 	private:
 		void showControlPanel() {
-			if (!showingControlPanel) {
-				auto punto = this->controlPanel->Location;
-				this->controlPanel->Location = Point(punto.X, punto.Y - 10);
-				if (punto.Y - 10 >= 0) showingControlPanel = true;
+			this->controlPanel->Visible = true;
+			auto punto = this->controlPanel->Location;
+			if (punto.Y + velCP >= 0) {
+				CPVisible = true;
+				mostrarCP = false;
+				animaciones->Enabled = false;
 			}
+			else this->controlPanel->Location = Point(punto.X, punto.Y + velCP);
 		}
+
+		void hideControlPanel() {
+			this->controlPanel->Visible = true;
+			auto punto = this->controlPanel->Location;
+			if (punto.Y + velCP <= (-190 - velCP)) {
+				CPVisible = false;
+				mostrarCP = true;
+				animaciones->Enabled = false;
+			}
+			else this->controlPanel->Location = Point(punto.X, punto.Y - velCP);
+		}
+
 		void gameOver() {
 			if (!this->imgMuerte->Visible) {
 				this->imgMuerte->Image = gcnew Bitmap("imgs/imgMuerte.png");
@@ -295,14 +326,20 @@ namespace TrabajoFinal {
 				this->imgMuerte->Width += 8;
 				this->imgMuerte->Height += 8;
 			}
+
 			if (this->imgMuerte->Location.Y <= 0 && !showForm) {
 				showForm = true;
 				auto curados = g_contagiado->curados;
 				auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
+				//std::cout << this->Controls->Count;
 				if(screenGO->ShowDialog(this) == System::Windows::Forms::DialogResult::OK) 
 					this->Close();
 				delete screenGO;
 			}
 		}
-	};
+	private: System::Void animaciones_Tick(System::Object^ sender, System::EventArgs^ e) {
+		if (mostrarCP && !CPVisible) showControlPanel();
+		else if (!mostrarCP && CPVisible) hideControlPanel();
+	}
+};
 }
