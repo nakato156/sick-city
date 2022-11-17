@@ -1,21 +1,21 @@
 #include "Enfermero.h"
-#include "constantes.h"
 #include <iostream>
 using namespace std;
 using namespace System::Drawing;
 
-Enfermero::Enfermero(int posX, int posY, int velocidad, int vidas){
+Enfermero::Enfermero(int posX, int posY, int velocidad, int vidas, int limite){
 	this->posX = posX;
 	this->posY = posY;
 	this->vidas = vidas;
 	this->velocidad = velocidad;
+	limite_piso = limite;
 	velocidadNormal = velocidad;
 	
 	indiceX = 0;	//falta definir tras sprite
 	indiceY = 0;	//falta definir tras sprite
 	
-	alto = 230;		//falta definir tras sprite
-	ancho = 210;		//falta definir tras sprite
+	alto = 230;
+	ancho = 210;
 	
 	
 	ultimatecla = Derecha;
@@ -63,7 +63,7 @@ void Enfermero::mueveEnfermero(BufferedGraphics^ buffer, Bitmap^ bmp) {
 		if (indiceX >= 0 && indiceX < 6) indiceX++;
 		else indiceX = 0;
 
-		if (posY > LIMITE_PISO) posY -= velocidad;
+		if (posY > limite_piso) posY -= velocidad;
 		ultimatecla = Arriba;
 		break;
 	case Izquierda:

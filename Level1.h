@@ -8,6 +8,7 @@
 #include "GestorEnfermo.h"
 #include "screenGameOver.h"
 #include "funcionesAddicionales.h"
+#include "ScreenWin.h"
 
 namespace TrabajoFinal {
 
@@ -217,7 +218,7 @@ namespace TrabajoFinal {
 			velCP = 30;
 
 			cronometro = new Cronometro();
-			enfermero = new Enfermero(10, 300, 10, 5);
+			enfermero = new Enfermero(10, 300, 10, 5, LIMITE_PISO);
 			g_contagiado = new GesContagiado();
 			lista_balas = new GestorBalas();
 
@@ -289,6 +290,12 @@ namespace TrabajoFinal {
 		delete buffer;
 		delete canvaFormulario;
 		delete espacio;
+		/*if (g_contagiado->getCantidad() == 0) {
+			Level2^ lvl2 = gcnew Level2(tipo_personaje, audio);
+			this->Hide();
+			lvl2->ShowDialog(this);
+			this->Close();
+		}*/
 	}
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);

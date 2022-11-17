@@ -130,6 +130,7 @@
     <ClCompile Include="Mochila.cpp" />
     <ClCompile Include="Reglas.cpp" />
     <ClCompile Include="screenGameOver.cpp" />
+    <ClCompile Include="ScreenWin.cpp" />
     <ClCompile Include="selecModoJuego.cpp" />
     <ClCompile Include="selecPersonaje.cpp" />
   </ItemGroup>
@@ -160,6 +161,9 @@
     </ClInclude>
     <ClInclude Include="Item.h" />
     <ClInclude Include="Mochila.h" />
+    <ClInclude Include="ScreenWin.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="selecModoJuego.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -185,6 +189,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="screenGameOver.resx">
       <DependentUpon>screenGameOver.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ScreenWin.resx">
+      <DependentUpon>ScreenWin.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="selecModoJuego.resx">
       <DependentUpon>selecModoJuego.h</DependentUpon>
