@@ -24,20 +24,19 @@ namespace TrabajoFinal {
 	public ref class Level1 : public System::Windows::Forms::Form
 	{
 	private:
-		bool GM = false;
-		bool showForm = false, mostrarCP = true, CPVisible = false;
-		int velCP = 30;
+		bool GM, showForm, mostrarCP, CPVisible;
+		int velCP;
 
 		SoundPlayer^ audio;
-		Cronometro* cronometro = new Cronometro();
-		Enfermero* enfermero = new Enfermero(10, 300, 10, 5);
-		GesContagiado* g_contagiado = new GesContagiado();
-		GestorBalas* lista_balas = new GestorBalas();
+		Cronometro* cronometro;
+		Enfermero* enfermero;
+		GesContagiado* g_contagiado;
+		GestorBalas* lista_balas;
 		
 
 		Bitmap^ mapa_contagiados = gcnew Bitmap("enfermo.png");
 		Bitmap^ mapa_enfermero;
-		Bitmap^ mapa_bala= gcnew Bitmap("bala.png");
+		Bitmap^ mapa_bala = gcnew Bitmap("bala.png");
 	private: System::Windows::Forms::PictureBox^ imgMuerte;
 
 		int sizeImgVida = 24;
@@ -55,18 +54,12 @@ namespace TrabajoFinal {
 		Level1(System::String^ personaje, SoundPlayer^ musica)
 		{
 			InitializeComponent();
+			audio = musica;
+			tipo_personaje = personaje;
+			initGame();
 			//
 			//TODO: agregar código de constructor aquí
 			//
-			audio = musica;
-			tipo_personaje = personaje;
-			int cantidad = Random().Next(5, 20);
-			g_contagiado->creaContagiados(cantidad, 8);
-			
-			cronometro->init();
-
-			mapa_enfermero = gcnew Bitmap(personaje +  ".png");
-			dibujaVidas();
 		}
 
 	protected:
@@ -180,6 +173,26 @@ namespace TrabajoFinal {
 
 		}
 #pragma endregion
+	private:
+		void initGame() {
+			this->imgMuerte->Visible = false;
+			GM = false;
+			showForm = false, mostrarCP = true, CPVisible = false;
+			velCP = 30;
+
+			cronometro = new Cronometro();
+			enfermero = new Enfermero(10, 300, 10, 5);
+			g_contagiado = new GesContagiado();
+			lista_balas = new GestorBalas();
+
+			int cantidad = Random().Next(5, 20);
+			g_contagiado->creaContagiados(cantidad, 8);
+
+			cronometro->init();
+
+			mapa_enfermero = gcnew Bitmap(tipo_personaje + ".png");
+			dibujaVidas();
+		}
 	private: void dibujaVidas() {
 		this->imgVidas->Width = enfermero->getVidas() * sizeImgVida;
 	}
@@ -265,10 +278,7 @@ namespace TrabajoFinal {
 		else if (key == Keys::Right || key == Keys::Left || key == Keys::Up || key == Keys::Down) {
 			enfermero->setDireccion(Ninguna);
 		}
-		else if (key == Keys::Escape) {
-			//mostrarCP = !mostrarCP;
-			animaciones->Enabled = true;
-		}
+		else if (key == Keys::Escape) animaciones->Enabled = true;
 	}
 	
 	template<class T>
@@ -325,8 +335,12 @@ namespace TrabajoFinal {
 				auto curados = g_contagiado->curados;
 				auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
 				//std::cout << this->Controls->Count;
-				if(screenGO->ShowDialog(this) == System::Windows::Forms::DialogResult::OK) 
+				if (screenGO->ShowDialog(this) == System::Windows::Forms::DialogResult::OK)
 					this->Close();
+				else {
+					InitializeComponent();
+					initGame();
+				}
 				delete screenGO;
 			}
 		}
