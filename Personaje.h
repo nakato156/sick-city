@@ -6,6 +6,7 @@ protected:
 	int posX, posY;
 	int velocidad;
 	int vidas;
+	int limite_piso;
 	int ancho;
 	int alto;
 	Mochila mochila;

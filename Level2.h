@@ -6,6 +6,7 @@
 #include "GestorBalas.h"
 #include "Cronometro.h"
 #include "screenGameOver.h"
+#include "ScreenWin.h"
 namespace TrabajoFinal {
 
 	using namespace System;
@@ -22,10 +23,11 @@ namespace TrabajoFinal {
 	public ref class Level2 : public System::Windows::Forms::Form
 	{
 	private:
-		bool GM = false;
+		bool GO = false;
+		bool GW = false;
 		SoundPlayer^ audio;
 		Cronometro* cronometro = new Cronometro();
-		Enfermero* enfermero = new Enfermero(10, 300, 10, 3);
+		Enfermero* enfermero = new Enfermero(10, 300, 10, 3, 270);
 		GesContagiado* g_contagiado = new GesContagiado();
 		GestorBalas* lista_balas = new GestorBalas();
 
@@ -42,6 +44,7 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::Windows::Forms::PictureBox^ imgVidas;
 	private: System::Windows::Forms::Label^ label1;
+	private: System::Windows::Forms::PictureBox^ imgWin;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
@@ -97,9 +100,11 @@ namespace TrabajoFinal {
 			this->imgVidas = (gcnew System::Windows::Forms::PictureBox());
 			this->imgMuerte = (gcnew System::Windows::Forms::PictureBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->imgWin = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgWin))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// timer1
@@ -151,15 +156,30 @@ namespace TrabajoFinal {
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"label1";
 			// 
+			// imgWin
+			// 
+			this->imgWin->BackColor = System::Drawing::Color::Transparent;
+			this->imgWin->Location = System::Drawing::Point(378, 303);
+			this->imgWin->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->imgWin->Name = L"imgWin";
+			this->imgWin->Size = System::Drawing::Size(150, 77);
+			this->imgWin->TabIndex = 4;
+			this->imgWin->TabStop = false;
+			this->imgWin->Visible = false;
+			// 
 			// Level2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
 			this->ClientSize = System::Drawing::Size(1312, 605);
+			this->Controls->Add(this->imgWin);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->imgMuerte);
 			this->Controls->Add(this->imgVidas);
 			this->Controls->Add(this->pictureBox1);
+			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Name = L"Level2";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -170,6 +190,7 @@ namespace TrabajoFinal {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgWin))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -181,8 +202,12 @@ namespace TrabajoFinal {
 			this->imgVidas->Width = enfermero->getVidas() * sizeImgVida;
 		}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
-		if (GM) {
+		if (GO) {
 			gameOver();
+			return;
+		}
+		if (GW) {
+			gameWin();
 			return;
 		}
 		label1->BackColor = Color::Red;
@@ -210,6 +235,12 @@ namespace TrabajoFinal {
 					g_contagiado->actualizarLista();	//eliminar el contagiado colisionado
 					lista_balas->actualizarLista();		//eliminar la bala que colisiono
 				}
+				if (g_contagiado->getCantidad() == 0) {
+					cronometro->fin();
+					GW = true;
+					audio->Stop();
+					break;
+				}
 			}
 			lista_balas->actualizarSalida(buffer);
 		}
@@ -220,12 +251,13 @@ namespace TrabajoFinal {
 				enfermero->reset();
 				if (enfermero->getVidas() == 0) {
 					cronometro->fin();
-					GM = true;
+					GO = true;
 					audio->Stop();
 				}
+				
 				dibujaVidas();
 				contagiados->setColisionEnfermero(false);
-				if (GM) break;
+				if (GO) break;
 			}
 		}
 		buffer->Render(canvaFormulario);
@@ -276,6 +308,28 @@ private: System::Void Level2_KeyUp(System::Object^ sender, System::Windows::Form
 				   auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
 				   screenGO->Show();
 				   this->Close();
+			   }
+		   }
+	   private:
+		   void gameWin() {
+			   if (!this->imgWin->Visible) {
+				   this->imgWin->Image = gcnew Bitmap("imgs/youWin.png");
+				   this->imgWin->Visible = true;
+			   }
+			   auto punto = this->imgWin->Location;
+			   this->imgWin->Location = Point(punto.X - 4, punto.Y - 4);
+			   this->imgWin->Width += 10;
+			   this->imgWin->Height += 10;
+			   if (this->imgWin->Location.Y <= -10) {
+				   auto curados = g_contagiado->curados;
+				   auto screenYW = gcnew ScreenWin(cronometro->getParseTime(), curados);
+				   this->Hide();
+				   this->timer1->Enabled = false;
+				   auto resultado = screenYW->ShowDialog();
+				   if (resultado == System::Windows::Forms::DialogResult::OK)
+				   { 
+					   this->Close();
+				   }
 			   }
 		   }
 };
