@@ -1,12 +1,13 @@
 #pragma once
-#include "Level2.h"
 #include<conio.h>
 #include <iostream>
+#include "Level2.h"
 #include "Enfermero.h"
-#include "GestorEnfermo.h"
-#include "GestorBalas.h"
 #include "Cronometro.h"
+#include "GestorBalas.h"
+#include "GestorEnfermo.h"
 #include "screenGameOver.h"
+#include "funcionesAddicionales.h"
 
 namespace TrabajoFinal {
 
@@ -23,10 +24,11 @@ namespace TrabajoFinal {
 	/// </summary>
 	public ref class Level1 : public System::Windows::Forms::Form
 	{
-	private:
+	public:
 		bool GM, showForm, mostrarCP, CPVisible;
 		int velCP;
 
+	private:
 		SoundPlayer^ audio;
 		Cronometro* cronometro;
 		Enfermero* enfermero;
@@ -48,6 +50,9 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::Panel^ controlPanel;
 	private: System::Windows::Forms::Button^ btnBack;
 	private: System::Windows::Forms::Timer^ animaciones;
+	private: System::Windows::Forms::Button^ btn_reanudar;
+	private: System::Windows::Forms::Button^ btn_mute;
+	private: System::Windows::Forms::Button^ btn_unmute;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
@@ -96,6 +101,9 @@ namespace TrabajoFinal {
 			this->imgVidas = (gcnew System::Windows::Forms::PictureBox());
 			this->imgMuerte = (gcnew System::Windows::Forms::PictureBox());
 			this->controlPanel = (gcnew System::Windows::Forms::Panel());
+			this->btn_reanudar = (gcnew System::Windows::Forms::Button());
+			this->btn_mute = (gcnew System::Windows::Forms::Button());
+			this->btn_unmute = (gcnew System::Windows::Forms::Button());
 			this->btnBack = (gcnew System::Windows::Forms::Button());
 			this->animaciones = (gcnew System::Windows::Forms::Timer(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
@@ -106,7 +114,6 @@ namespace TrabajoFinal {
 			// 
 			// timer1
 			// 
-			this->timer1->Enabled = true;
 			this->timer1->Tick += gcnew System::EventHandler(this, &Level1::timer1_Tick);
 			// 
 			// pictureBox1
@@ -132,10 +139,38 @@ namespace TrabajoFinal {
 			// controlPanel
 			// 
 			this->controlPanel->BackColor = System::Drawing::Color::Black;
+			this->controlPanel->Controls->Add(this->btn_reanudar);
+			this->controlPanel->Controls->Add(this->btn_mute);
+			this->controlPanel->Controls->Add(this->btn_unmute);
 			this->controlPanel->Controls->Add(this->btnBack);
 			this->controlPanel->ForeColor = System::Drawing::Color::White;
 			resources->ApplyResources(this->controlPanel, L"controlPanel");
 			this->controlPanel->Name = L"controlPanel";
+			// 
+			// btn_reanudar
+			// 
+			this->btn_reanudar->BackColor = System::Drawing::Color::DarkRed;
+			this->btn_reanudar->Cursor = System::Windows::Forms::Cursors::Hand;
+			resources->ApplyResources(this->btn_reanudar, L"btn_reanudar");
+			this->btn_reanudar->Name = L"btn_reanudar";
+			this->btn_reanudar->UseVisualStyleBackColor = false;
+			this->btn_reanudar->Click += gcnew System::EventHandler(this, &Level1::btn_reanudar_Click);
+			// 
+			// btn_mute
+			// 
+			this->btn_mute->Cursor = System::Windows::Forms::Cursors::Hand;
+			resources->ApplyResources(this->btn_mute, L"btn_mute");
+			this->btn_mute->Name = L"btn_mute";
+			this->btn_mute->UseVisualStyleBackColor = true;
+			this->btn_mute->Click += gcnew System::EventHandler(this, &Level1::btn_mute_Click);
+			// 
+			// btn_unmute
+			// 
+			this->btn_unmute->Cursor = System::Windows::Forms::Cursors::Hand;
+			resources->ApplyResources(this->btn_unmute, L"btn_unmute");
+			this->btn_unmute->Name = L"btn_unmute";
+			this->btn_unmute->UseVisualStyleBackColor = true;
+			this->btn_unmute->Click += gcnew System::EventHandler(this, &Level1::btn_unmute_Click);
 			// 
 			// btnBack
 			// 
@@ -144,6 +179,7 @@ namespace TrabajoFinal {
 			resources->ApplyResources(this->btnBack, L"btnBack");
 			this->btnBack->Name = L"btnBack";
 			this->btnBack->UseVisualStyleBackColor = false;
+			this->btnBack->Click += gcnew System::EventHandler(this, &Level1::btnBack_Click);
 			// 
 			// animaciones
 			// 
@@ -175,7 +211,7 @@ namespace TrabajoFinal {
 #pragma endregion
 	private:
 		void initGame() {
-			this->imgMuerte->Visible = false;
+			this->imgMuerte->Image = nullptr;
 			GM = false;
 			showForm = false, mostrarCP = true, CPVisible = false;
 			velCP = 30;
@@ -192,6 +228,7 @@ namespace TrabajoFinal {
 
 			mapa_enfermero = gcnew Bitmap(tipo_personaje + ".png");
 			dibujaVidas();
+			this->timer1->Enabled = true;
 		}
 	private: void dibujaVidas() {
 		this->imgVidas->Width = enfermero->getVidas() * sizeImgVida;
@@ -224,8 +261,11 @@ namespace TrabajoFinal {
 				if (contagiado->checkColision(bala)) {
 					bala->setColision(true);			//si hay colision, cambiar el estado de la bala
 					g_contagiado->actualizarLista();	//eliminar el contagiado colisionado
-					lista_balas->actualizarLista();		//eliminar la bala que colisiono
 				}
+			}
+			if (!g_contagiado->getCantidad()) { //showScreenWinGame(this, gcnew );
+				delete lista_balas;
+				break;
 			}
 			lista_balas->actualizarSalida(buffer);
 		}
@@ -275,48 +315,13 @@ namespace TrabajoFinal {
 	private: System::Void Inicio_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		auto key = e->KeyCode;
 		if(key == Keys::ControlKey) enfermero->resetVelocidad();
+		else if (key == Keys::Escape) animaciones->Enabled = true;
 		else if (key == Keys::Right || key == Keys::Left || key == Keys::Up || key == Keys::Down) {
 			enfermero->setDireccion(Ninguna);
 		}
-		else if (key == Keys::Escape) animaciones->Enabled = true;
-	}
-	
-	template<class T>
-	void abrirForm(T nuevoForm) {
-		if (this->contenedor->Controls->Count > 0) this->contenedor->Controls->RemoveAt(0);
-
-		nuevoForm->TopLevel = false;
-		nuevoForm->Dock = DockStyle::Fill;
-
-		this->contenedor->Controls->Add(nuevoForm);
-		this->contenedor->Tag = nuevoForm;
-		this->contenedor->Visible = true;
-		nuevoForm->Show();
-		//this->contenedor->Visible = false;
 	}
 
 	private:
-		void showControlPanel() {
-			this->controlPanel->Visible = true;
-			auto punto = this->controlPanel->Location;
-			if (punto.Y + velCP >= 0) {
-				CPVisible = true;
-				mostrarCP = false;
-				animaciones->Enabled = false;
-			}
-			else this->controlPanel->Location = Point(punto.X, punto.Y + velCP);
-		}
-
-		void hideControlPanel() {
-			this->controlPanel->Visible = true;
-			auto punto = this->controlPanel->Location;
-			if (punto.Y + velCP <= (-190 - velCP)) {
-				CPVisible = false;
-				mostrarCP = true;
-				animaciones->Enabled = false;
-			}
-			else this->controlPanel->Location = Point(punto.X, punto.Y - velCP);
-		}
 
 		void gameOver() {
 			if (!this->imgMuerte->Visible) {
@@ -329,12 +334,11 @@ namespace TrabajoFinal {
 				this->imgMuerte->Width += 8;
 				this->imgMuerte->Height += 8;
 			}
-
-			if (this->imgMuerte->Location.Y <= 0 && !showForm) {
-				showForm = true;
+			else if (this->imgMuerte->Location.Y <= 0) {
+				this->timer1->Enabled = false;
 				auto curados = g_contagiado->curados;
 				auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
-				//std::cout << this->Controls->Count;
+				
 				if (screenGO->ShowDialog(this) == System::Windows::Forms::DialogResult::OK)
 					this->Close();
 				else {
@@ -345,8 +349,21 @@ namespace TrabajoFinal {
 			}
 		}
 	private: System::Void animaciones_Tick(System::Object^ sender, System::EventArgs^ e) {
-		if (mostrarCP && !CPVisible) showControlPanel();
-		else if (!mostrarCP && CPVisible) hideControlPanel();
+		if (mostrarCP && !CPVisible) showControlPanel(this, this->controlPanel, this->animaciones);
+		else if (!mostrarCP && CPVisible) hideControlPanel(this, this->controlPanel, this->animaciones);
 	}
+private: System::Void btnBack_Click(System::Object^ sender, System::EventArgs^ e) {
+	DialogResult = System::Windows::Forms::DialogResult::Abort;
+	this->Close();
+}
+private: System::Void btn_reanudar_Click(System::Object^ sender, System::EventArgs^ e) {
+	animaciones->Enabled = true;
+}
+private: System::Void btn_unmute_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->audio->PlayLooping();
+}
+private: System::Void btn_mute_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->audio->Stop();
+}
 };
 }
