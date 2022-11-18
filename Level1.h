@@ -262,6 +262,7 @@ namespace TrabajoFinal {
 				if (contagiado->checkColision(bala)) {
 					bala->setColision(true);			//si hay colision, cambiar el estado de la bala
 					g_contagiado->actualizarLista();	//eliminar el contagiado colisionado
+					lista_balas->actualizarLista();		//eliminar la bala que colisiono
 				}
 			}
 			if (!g_contagiado->getCantidad()) { //showScreenWinGame(this, gcnew );
@@ -297,7 +298,7 @@ namespace TrabajoFinal {
 		switch (e->KeyCode) {
 		case Keys::Space:
 			enfermero->setDireccion(Disparar);
-			lista_balas->addBala(new Bala(40, 10, enfermero, 30));
+			lista_balas->addBala(new Bala(40, 10, enfermero, 20));
 			break;
 		case Keys::Left:
 			enfermero->setDireccion(Izquierda);
