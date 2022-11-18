@@ -266,6 +266,7 @@ namespace TrabajoFinal {
 			}
 			if (!g_contagiado->getCantidad()) { //showScreenWinGame(this, gcnew );
 				delete lista_balas;
+				gameWin();
 				break;
 			}
 			lista_balas->actualizarSalida(buffer);
@@ -290,12 +291,6 @@ namespace TrabajoFinal {
 		delete buffer;
 		delete canvaFormulario;
 		delete espacio;
-		/*if (g_contagiado->getCantidad() == 0) {
-			Level2^ lvl2 = gcnew Level2(tipo_personaje, audio);
-			this->Hide();
-			lvl2->ShowDialog(this);
-			this->Close();
-		}*/
 	}
 	private: System::Void Inicio_KeyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 		if (e->KeyCode == Keys::ControlKey) enfermero->addVelocidad(8);
@@ -329,7 +324,11 @@ namespace TrabajoFinal {
 	}
 
 	private:
-
+		void gameWin() {
+			auto curados = g_contagiado->curados;
+			auto tiempo = cronometro->getParseTime();
+			showScreenWinGame(this, gcnew ScreenWin(tiempo, curados), timer1);
+		}
 		void gameOver() {
 			if (!this->imgMuerte->Visible) {
 				this->imgMuerte->Image = gcnew Bitmap("imgs/imgMuerte.png");
