@@ -93,9 +93,14 @@ namespace TrabajoFinal {
 		}
 #pragma endregion
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^ e) {
+		this->Hide();
 		auto seleccionarPers= gcnew selecPersonaje();
-		seleccionarPers->Show();
-		this->Close();
+		auto result = seleccionarPers->ShowDialog();
+		if (result == System::Windows::Forms::DialogResult::Abort) {
+			DialogResult = result;
+			this->Close();
+		}
+		else this->Close();
 	}
 	private: System::Void PintaRegla(System::Object^ sender, System::Windows::Forms::PaintEventArgs^ e) {
 		DibujarReglas(e);

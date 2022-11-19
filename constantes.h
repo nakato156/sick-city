@@ -1,4 +1,6 @@
 #pragma once
+enum Direcciones { Ninguna, Abajo, Arriba, Izquierda, Derecha, Disparar };
+
 #define WIDTH_VENTANA  850
 #define HEIGHT_VENTANA 328
 #define LIMITE_PISO 250

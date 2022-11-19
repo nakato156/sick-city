@@ -140,6 +140,7 @@
     <ClInclude Include="constantes.h" />
     <ClInclude Include="Cronometro.h" />
     <ClInclude Include="Enfermero.h" />
+    <ClInclude Include="EnfermeroController.h" />
     <ClInclude Include="Enfermo.h" />
     <ClInclude Include="funcionesAddicionales.h" />
     <ClInclude Include="GestorBalas.h" />

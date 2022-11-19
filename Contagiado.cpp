@@ -8,7 +8,6 @@ Contagiado::Contagiado(int anchoV, int vel) {
 	velocidad = vel;
 	vidas = 1;
 	indiceX = 0; indiceY = 0;
-	//DEFINIR CON SPRITE
 	alto = 230; ancho = 220;
 
 	posX = anchoV;
@@ -24,7 +23,6 @@ void Contagiado::dibujaContagiado(BufferedGraphics^ buffer, Bitmap^ bmp) {
 }
 
 void Contagiado::mueveContagiado(BufferedGraphics^ buffer, Bitmap^ bmp, Enfermero* enfermero) {
-	//std::cout << indiceX << "," << indiceY << endl;
 	indiceY = 1;
 	dibujaContagiado(buffer, bmp);
 	

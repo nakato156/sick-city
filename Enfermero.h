@@ -1,7 +1,7 @@
 #pragma once
 #include "Personaje.h"
 #include "constantes.h"
-enum Direcciones { Ninguna, Abajo, Arriba, Izquierda, Derecha, Disparar };
+
 class Enfermero : public Personaje{
 private:
 	int velocidadNormal;
@@ -9,7 +9,7 @@ private:
 	Direcciones direccion;
 public:
 	Enfermero(int posX, int posY, int velocidad, int vidas, int limite);
-	~Enfermero();
+	~Enfermero() = default;
 	void setDireccion(Direcciones _direccion);
 	int getX();	
 	int getY();	

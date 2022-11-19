@@ -37,5 +37,6 @@
     <ClInclude Include="selecModoJuego.h" />
     <ClInclude Include="selecPersonaje.h" />
     <ClInclude Include="levelMultiplayer.h" />
+    <ClInclude Include="EnfermeroController.h" />
   </ItemGroup>
 </Project>
