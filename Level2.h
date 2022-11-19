@@ -1,6 +1,5 @@
 #pragma once
 #include <conio.h>
-#include <iostream>
 #include "Enfermero.h"
 #include "ScreenWin.h"
 #include "Cronometro.h"
@@ -37,9 +36,9 @@ namespace TrabajoFinal {
 		GesContagiado* g_contagiado = new GesContagiado();
 		GestorBalas* lista_balas = new GestorBalas();
 
-		Bitmap^ mapa_contagiados = gcnew Bitmap("enfermo.png");
+		Bitmap^ mapa_contagiados = gcnew Bitmap(RUTA_SPRITE_CONT);
 		Bitmap^ mapa_enfermero;
-		Bitmap^ mapa_bala = gcnew Bitmap("bala.png");
+		Bitmap^ mapa_bala = gcnew Bitmap(RUTA_SPRITE_BALA);
 
 
 	private: System::Windows::Forms::PictureBox^ imgMuerte;
@@ -73,7 +72,7 @@ namespace TrabajoFinal {
 
 			cronometro->init();
 
-			mapa_enfermero = gcnew Bitmap(personaje + ".png");
+			mapa_enfermero = gcnew Bitmap( FOLDER_SPRITES + personaje + ".png");
 			dibujaVidas();
 		}
 

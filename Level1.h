@@ -1,14 +1,13 @@
 #pragma once
-#include<conio.h>
-#include <iostream>
+#include <conio.h>
 #include "Level2.h"
 #include "Enfermero.h"
+#include "ScreenWin.h"
 #include "Cronometro.h"
 #include "GestorBalas.h"
 #include "GestorEnfermo.h"
 #include "screenGameOver.h"
 #include "funcionesAddicionales.h"
-#include "ScreenWin.h"
 
 namespace TrabajoFinal {
 
@@ -37,9 +36,9 @@ namespace TrabajoFinal {
 		GestorBalas* lista_balas;
 		
 
-		Bitmap^ mapa_contagiados = gcnew Bitmap("enfermo.png");
+		Bitmap^ mapa_contagiados = gcnew Bitmap(RUTA_SPRITE_CONT);
 		Bitmap^ mapa_enfermero;
-		Bitmap^ mapa_bala = gcnew Bitmap("bala.png");
+		Bitmap^ mapa_bala = gcnew Bitmap(RUTA_SPRITE_BALA);
 	private: System::Windows::Forms::PictureBox^ imgMuerte;
 
 		int sizeImgVida = 24;
@@ -227,7 +226,7 @@ namespace TrabajoFinal {
 
 			cronometro->init();
 
-			mapa_enfermero = gcnew Bitmap(tipo_personaje + ".png");
+			mapa_enfermero = gcnew Bitmap("sprites/" + tipo_personaje + ".png");
 			dibujaVidas();
 			this->timer1->Enabled = true;
 		}

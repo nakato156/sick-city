@@ -126,6 +126,7 @@
     <ClCompile Include="GestorBalas.cpp" />
     <ClCompile Include="GestorContagiado.cpp" />
     <ClCompile Include="Level2.cpp" />
+    <ClCompile Include="levelMultiplayer.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mochila.cpp" />
     <ClCompile Include="Reglas.cpp" />
@@ -147,6 +148,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Level2.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="levelMultiplayer.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Reglas.h">
@@ -183,6 +187,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Level2.resx">
       <DependentUpon>Level2.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="levelMultiplayer.resx">
+      <DependentUpon>levelMultiplayer.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reglas.resx">
       <DependentUpon>Reglas.h</DependentUpon>

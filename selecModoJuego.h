@@ -1,6 +1,7 @@
 #pragma once
-//#include "Level1.h"
+#include "levelMultiplayer.h"
 #include "Reglas.h"
+
 namespace TrabajoFinal {
 
 	using namespace System;
@@ -121,6 +122,7 @@ namespace TrabajoFinal {
 			this->imgMultiplayer->Size = System::Drawing::Size(217, 129);
 			this->imgMultiplayer->TabIndex = 4;
 			this->imgMultiplayer->TabStop = false;
+			this->imgMultiplayer->Click += gcnew System::EventHandler(this, &selecModoJuego::imgMultiplayer_Click);
 			// 
 			// selecModoJuego
 			// 
@@ -151,12 +153,32 @@ namespace TrabajoFinal {
 #pragma endregion
 	private: System::Void imgSingleplayer_Click(System::Object^ sender, System::EventArgs^ e) {
 		Reglas^ reglas = gcnew Reglas();
-		this->Visible = false;
-		reglas->Show();
-		//Level1^ lvl1 = gcnew Level1();
-		//lvl1->Show();
+		this->Hide();
+		auto result = reglas->ShowDialog();
+		if (result == System::Windows::Forms::DialogResult::OK) {
+			this->Close();
+		}
+		else if (result == System::Windows::Forms::DialogResult::Abort) {
+			DialogResult = result;
+			return this->Close();
+		}
+		this->Visible = true;
 	}
 private: System::Void selecModoJuego_Load(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void imgMultiplayer_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Hide();
+	System::Windows::Forms::DialogResult result;
+	while (true) {
+		levelMultiplayer^ lvl2Player = gcnew levelMultiplayer();
+		result = lvl2Player->ShowDialog();
+		if (result != System::Windows::Forms::DialogResult::Retry) break;
+	}
+	if (result == System::Windows::Forms::DialogResult::Abort) {
+		DialogResult = result;
+		return this->Close();
+	}
+	this->Visible = true;
 }
 };
 }
