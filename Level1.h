@@ -265,10 +265,9 @@ namespace TrabajoFinal {
 					lista_balas->actualizarLista();		//eliminar la bala que colisiono
 				}
 			}
-			if (!g_contagiado->getCantidad()) { //showScreenWinGame(this, gcnew );
-				delete lista_balas;
+			if (!g_contagiado->getCantidad()) {
 				gameWin();
-				break;
+				return;
 			}
 			lista_balas->actualizarSalida(buffer);
 		}
@@ -349,6 +348,7 @@ namespace TrabajoFinal {
 				if (screenGO->ShowDialog(this) == System::Windows::Forms::DialogResult::OK)
 					this->Close();
 				else {
+					delete imgMuerte;
 					InitializeComponent();
 					initGame();
 				}

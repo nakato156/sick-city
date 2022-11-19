@@ -3,6 +3,7 @@
 template <class F, class NF>
 void showScreenWinGame(F^ form, NF^ nuevoForm, System::Windows::Forms::Timer^ timer) {
 	timer->Enabled = false;
+	form->Hide();
 	auto resultado = nuevoForm->ShowDialog(form);
 	if (resultado == System::Windows::Forms::DialogResult::OK)
 		form->DialogResult = System::Windows::Forms::DialogResult::OK;
