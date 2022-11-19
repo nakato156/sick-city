@@ -156,13 +156,13 @@ namespace TrabajoFinal {
 		this->Hide();
 		auto result = reglas->ShowDialog();
 		if (result == System::Windows::Forms::DialogResult::OK) {
+			this->Visible = true;
 			this->Close();
 		}
 		else if (result == System::Windows::Forms::DialogResult::Abort) {
 			DialogResult = result;
 			return this->Close();
 		}
-		this->Visible = true;
 	}
 private: System::Void selecModoJuego_Load(System::Object^ sender, System::EventArgs^ e) {
 }

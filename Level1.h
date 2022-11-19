@@ -325,6 +325,7 @@ namespace TrabajoFinal {
 	private:
 		void gameWin() {
 			auto curados = g_contagiado->curados;
+			cronometro->fin();
 			auto tiempo = cronometro->getParseTime();
 			showScreenWinGame(this, gcnew ScreenWin(tiempo, curados), timer1);
 		}
