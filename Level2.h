@@ -1,12 +1,14 @@
 #pragma once
-#include<conio.h>
+#include <conio.h>
 #include <iostream>
 #include "Enfermero.h"
-#include "GestorEnfermo.h"
-#include "GestorBalas.h"
-#include "Cronometro.h"
-#include "screenGameOver.h"
 #include "ScreenWin.h"
+#include "Cronometro.h"
+#include "GestorBalas.h"
+#include "GestorEnfermo.h"
+#include "screenGameOver.h"
+#include "funcionesAddicionales.h"
+
 namespace TrabajoFinal {
 
 	using namespace System;
@@ -22,9 +24,13 @@ namespace TrabajoFinal {
 	/// </summary>
 	public ref class Level2 : public System::Windows::Forms::Form
 	{
+	public:
+		bool mostrarCP = true, CPVisible = false;
+		int velCP = 30;
+
 	private:
-		bool GO = false;
-		bool GW = false;
+		bool GO = false, GW = false;
+
 		SoundPlayer^ audio;
 		Cronometro* cronometro = new Cronometro();
 		Enfermero* enfermero = new Enfermero(10, 300, 10, 3, 270);
@@ -45,6 +51,12 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::PictureBox^ imgVidas;
 	private: System::Windows::Forms::Label^ label1;
 	private: System::Windows::Forms::PictureBox^ imgWin;
+	private: System::Windows::Forms::Panel^ controlPanel;
+	private: System::Windows::Forms::Button^ btn_reanudar;
+	private: System::Windows::Forms::Button^ btn_mute;
+	private: System::Windows::Forms::Button^ btn_unmute;
+	private: System::Windows::Forms::Button^ btnBack;
+	private: System::Windows::Forms::Timer^ animaciones;
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
@@ -101,10 +113,17 @@ namespace TrabajoFinal {
 			this->imgMuerte = (gcnew System::Windows::Forms::PictureBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->imgWin = (gcnew System::Windows::Forms::PictureBox());
+			this->controlPanel = (gcnew System::Windows::Forms::Panel());
+			this->btn_reanudar = (gcnew System::Windows::Forms::Button());
+			this->btn_mute = (gcnew System::Windows::Forms::Button());
+			this->btn_unmute = (gcnew System::Windows::Forms::Button());
+			this->btnBack = (gcnew System::Windows::Forms::Button());
+			this->animaciones = (gcnew System::Windows::Forms::Timer(this->components));
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgWin))->BeginInit();
+			this->controlPanel->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// timer1
@@ -115,9 +134,10 @@ namespace TrabajoFinal {
 			// pictureBox1
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
-			this->pictureBox1->Location = System::Drawing::Point(549, 236);
+			this->pictureBox1->Location = System::Drawing::Point(366, 153);
+			this->pictureBox1->Margin = System::Windows::Forms::Padding(2);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(121, 48);
+			this->pictureBox1->Size = System::Drawing::Size(81, 31);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
@@ -128,10 +148,9 @@ namespace TrabajoFinal {
 			this->imgVidas->BackColor = System::Drawing::Color::Transparent;
 			this->imgVidas->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"imgVidas.BackgroundImage")));
 			this->imgVidas->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->imgVidas->Location = System::Drawing::Point(13, 14);
-			this->imgVidas->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->imgVidas->Location = System::Drawing::Point(9, 9);
 			this->imgVidas->Name = L"imgVidas";
-			this->imgVidas->Size = System::Drawing::Size(111, 35);
+			this->imgVidas->Size = System::Drawing::Size(74, 23);
 			this->imgVidas->TabIndex = 1;
 			this->imgVidas->TabStop = false;
 			// 
@@ -139,10 +158,9 @@ namespace TrabajoFinal {
 			// 
 			this->imgMuerte->BackColor = System::Drawing::Color::Transparent;
 			this->imgMuerte->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->imgMuerte->Location = System::Drawing::Point(378, 218);
-			this->imgMuerte->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->imgMuerte->Location = System::Drawing::Point(252, 142);
 			this->imgMuerte->Name = L"imgMuerte";
-			this->imgMuerte->Size = System::Drawing::Size(150, 77);
+			this->imgMuerte->Size = System::Drawing::Size(100, 50);
 			this->imgMuerte->TabIndex = 2;
 			this->imgMuerte->TabStop = false;
 			this->imgMuerte->Visible = false;
@@ -150,30 +168,101 @@ namespace TrabajoFinal {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(490, 30);
+			this->label1->Location = System::Drawing::Point(327, 19);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(51, 20);
+			this->label1->Size = System::Drawing::Size(35, 13);
 			this->label1->TabIndex = 3;
 			this->label1->Text = L"label1";
 			// 
 			// imgWin
 			// 
 			this->imgWin->BackColor = System::Drawing::Color::Transparent;
-			this->imgWin->Location = System::Drawing::Point(378, 303);
-			this->imgWin->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
+			this->imgWin->Location = System::Drawing::Point(252, 197);
 			this->imgWin->Name = L"imgWin";
-			this->imgWin->Size = System::Drawing::Size(150, 77);
+			this->imgWin->Size = System::Drawing::Size(100, 50);
 			this->imgWin->TabIndex = 4;
 			this->imgWin->TabStop = false;
 			this->imgWin->Visible = false;
 			// 
+			// controlPanel
+			// 
+			this->controlPanel->BackColor = System::Drawing::Color::Black;
+			this->controlPanel->Controls->Add(this->btn_reanudar);
+			this->controlPanel->Controls->Add(this->btn_mute);
+			this->controlPanel->Controls->Add(this->btn_unmute);
+			this->controlPanel->Controls->Add(this->btnBack);
+			this->controlPanel->ForeColor = System::Drawing::Color::White;
+			this->controlPanel->Location = System::Drawing::Point(317, -190);
+			this->controlPanel->Name = L"controlPanel";
+			this->controlPanel->Size = System::Drawing::Size(200, 190);
+			this->controlPanel->TabIndex = 5;
+			this->controlPanel->Visible = false;
+			// 
+			// btn_reanudar
+			// 
+			this->btn_reanudar->BackColor = System::Drawing::Color::DarkRed;
+			this->btn_reanudar->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_reanudar->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btn_reanudar->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->btn_reanudar->Location = System::Drawing::Point(59, 92);
+			this->btn_reanudar->Name = L"btn_reanudar";
+			this->btn_reanudar->Size = System::Drawing::Size(90, 32);
+			this->btn_reanudar->TabIndex = 14;
+			this->btn_reanudar->Text = L"Reanudar";
+			this->btn_reanudar->UseVisualStyleBackColor = false;
+			this->btn_reanudar->Click += gcnew System::EventHandler(this, &Level2::btn_reanudar_Click);
+			// 
+			// btn_mute
+			// 
+			this->btn_mute->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_mute->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btn_mute->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btn_mute.Image")));
+			this->btn_mute->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->btn_mute->Location = System::Drawing::Point(107, 35);
+			this->btn_mute->Name = L"btn_mute";
+			this->btn_mute->Size = System::Drawing::Size(33, 28);
+			this->btn_mute->TabIndex = 13;
+			this->btn_mute->UseVisualStyleBackColor = true;
+			// 
+			// btn_unmute
+			// 
+			this->btn_unmute->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btn_unmute->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btn_unmute->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btn_unmute.Image")));
+			this->btn_unmute->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->btn_unmute->Location = System::Drawing::Point(59, 35);
+			this->btn_unmute->Name = L"btn_unmute";
+			this->btn_unmute->Size = System::Drawing::Size(30, 28);
+			this->btn_unmute->TabIndex = 12;
+			this->btn_unmute->UseVisualStyleBackColor = true;
+			// 
+			// btnBack
+			// 
+			this->btnBack->BackColor = System::Drawing::Color::DarkRed;
+			this->btnBack->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->btnBack->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
+			this->btnBack->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+			this->btnBack->Location = System::Drawing::Point(59, 134);
+			this->btnBack->Name = L"btnBack";
+			this->btnBack->Size = System::Drawing::Size(90, 32);
+			this->btnBack->TabIndex = 0;
+			this->btnBack->Text = L"Ir al menu";
+			this->btnBack->UseVisualStyleBackColor = false;
+			this->btnBack->Click += gcnew System::EventHandler(this, &Level2::btnBack_Click);
+			// 
+			// animaciones
+			// 
+			this->animaciones->Tick += gcnew System::EventHandler(this, &Level2::animaciones_Tick);
+			// 
 			// Level2
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1312, 605);
+			this->ClientSize = System::Drawing::Size(875, 393);
+			this->Controls->Add(this->controlPanel);
 			this->Controls->Add(this->imgWin);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->imgMuerte);
@@ -181,6 +270,7 @@ namespace TrabajoFinal {
 			this->Controls->Add(this->pictureBox1);
 			this->DoubleBuffered = true;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Margin = System::Windows::Forms::Padding(2);
 			this->Name = L"Level2";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"Level2";
@@ -191,6 +281,7 @@ namespace TrabajoFinal {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgWin))->EndInit();
+			this->controlPanel->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -206,10 +297,11 @@ namespace TrabajoFinal {
 			gameOver();
 			return;
 		}
-		if (GW) {
+		else if (GW) {
 			gameWin();
 			return;
 		}
+		else if (CPVisible) return;
 		label1->BackColor = Color::Red;
 		label1->Text = "NIVEL 2";
 		Graphics^ canvaFormulario = this->CreateGraphics();
@@ -289,48 +381,71 @@ namespace TrabajoFinal {
 private: System::Void Level2_KeyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
 	auto key = e->KeyCode;
 	if (key == Keys::ControlKey) enfermero->resetVelocidad();
+	else if (key == Keys::Escape) animaciones->Enabled = true;
 	else if (key == Keys::Right || key == Keys::Left || key == Keys::Up || key == Keys::Down) {
 		enfermero->setDireccion(Ninguna);
 	}
 }
-	   private:
-		   void gameOver() {
-			   if (!this->imgMuerte->Visible) {
-				   this->imgMuerte->Image = gcnew Bitmap("imgs/imgMuerte.png");
-				   this->imgMuerte->Visible = true;
-			   }
-			   auto punto = this->imgMuerte->Location;
-			   this->imgMuerte->Location = Point(punto.X - 4, punto.Y - 4);
-			   this->imgMuerte->Width += 8;
-			   this->imgMuerte->Height += 8;
-			   if (this->imgMuerte->Location.Y <= 0) {
-				   auto curados = g_contagiado->curados;
-				   auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
-				   screenGO->Show();
-				   this->Close();
-			   }
-		   }
-	   private:
-		   void gameWin() {
-			   if (!this->imgWin->Visible) {
-				   this->imgWin->Image = gcnew Bitmap("imgs/youWin.png");
-				   this->imgWin->Visible = true;
-			   }
-			   auto punto = this->imgWin->Location;
-			   this->imgWin->Location = Point(punto.X - 4, punto.Y - 4);
-			   this->imgWin->Width += 10;
-			   this->imgWin->Height += 10;
-			   if (this->imgWin->Location.Y <= -10) {
-				   auto curados = g_contagiado->curados;
-				   auto screenYW = gcnew ScreenWin(cronometro->getParseTime(), curados);
-				   this->Hide();
-				   this->timer1->Enabled = false;
-				   auto resultado = screenYW->ShowDialog();
-				   if (resultado == System::Windows::Forms::DialogResult::OK)
-				   { 
-					   this->Close();
-				   }
-			   }
-		   }
+private:
+	void gameOver() {
+		if (!this->imgMuerte->Visible) {
+			this->imgMuerte->Image = gcnew Bitmap("imgs/imgMuerte.png");
+			this->imgMuerte->Visible = true;
+		}
+		
+		auto punto = this->imgMuerte->Location;
+		this->imgMuerte->Location = Point(punto.X - 4, punto.Y - 4);
+		this->imgMuerte->Width += 8;
+		this->imgMuerte->Height += 8;
+
+		if (this->imgMuerte->Location.Y <= 0) {
+			this->timer1->Enabled = false;
+			auto curados = g_contagiado->curados;
+			auto screenGO = gcnew screenGameOver(cronometro->getParseTime(), curados);
+			auto result = screenGO->ShowDialog();
+			DialogResult = result;
+			this->Close();
+		}
+	}
+private:
+	void gameWin() {
+		if (!this->imgWin->Visible) {
+			this->imgWin->Image = gcnew Bitmap("imgs/youWin.png");
+			this->imgWin->Visible = true;
+		}
+		
+		auto punto = this->imgWin->Location;
+		this->imgWin->Location = Point(punto.X - 4, punto.Y - 4);
+		this->imgWin->Width += 10;
+		this->imgWin->Height += 10;
+
+		if (this->imgWin->Location.Y <= -10) {
+			this->timer1->Enabled = false;
+
+			auto curados = g_contagiado->curados;
+			auto screenYW = gcnew ScreenWin(cronometro->getParseTime(), curados);
+			this->Hide();
+			auto resultado = screenYW->ShowDialog();
+
+			if (resultado == System::Windows::Forms::DialogResult::OK)
+			{
+				DialogResult = System::Windows::Forms::DialogResult::OK;
+			}
+			else DialogResult = System::Windows::Forms::DialogResult::Retry;
+			this->Close();
+		}
+	}
+
+private: System::Void animaciones_Tick(System::Object^ sender, System::EventArgs^ e) {
+	if (mostrarCP && !CPVisible) showControlPanel(this, this->controlPanel, this->animaciones);
+	else if (!mostrarCP && CPVisible) hideControlPanel(this, this->controlPanel, this->animaciones);
+}
+private: System::Void btn_reanudar_Click(System::Object^ sender, System::EventArgs^ e) {
+	animaciones->Enabled = true;
+}
+private: System::Void btnBack_Click(System::Object^ sender, System::EventArgs^ e) {
+	DialogResult = System::Windows::Forms::DialogResult::OK;
+	this->Close();
+}
 };
 }

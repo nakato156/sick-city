@@ -266,7 +266,6 @@ namespace TrabajoFinal {
 		//delete Buffer;
 		//delete espacio;
 		//delete f;
-
 	}
 	private: System::Void selecPersonaje_Load(System::Object^ sender, System::EventArgs^ e) {
 		timer1->Enabled = true;
@@ -311,9 +310,12 @@ namespace TrabajoFinal {
 	}
 
 	private: System::Void button3_Click(System::Object^ sender, System::EventArgs^ e) {
-		auto lvl2 = gcnew Level2(tipoPersonaje, audio);
 		this->Hide();
-		lvl2->ShowDialog();
+		while (true) {
+			auto lvl2 = gcnew Level2(tipoPersonaje, audio);
+			auto result = lvl2->ShowDialog();
+			if (result != System::Windows::Forms::DialogResult::Retry) break;
+		}
 		this->Visible = true;
 	}
 };
