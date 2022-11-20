@@ -18,6 +18,7 @@ namespace TrabajoFinal {
 	public ref class selecPersonaje : public System::Windows::Forms::Form
 	{
 	private:
+		int activeMove = 0, moveX, moveY; 
 		bool playing = true;
 		SoundPlayer^ audio = gcnew SoundPlayer("audio-juego.wav");
 		System::String^ tipoPersonaje;
@@ -36,7 +37,9 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::Button^ button2;
 	private: System::Windows::Forms::Button^ btnPlay;
 	private: System::Windows::Forms::Button^ button3;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
+	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
 
 
 
@@ -89,8 +92,10 @@ namespace TrabajoFinal {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->btnPlay = (gcnew System::Windows::Forms::Button());
 			this->button3 = (gcnew System::Windows::Forms::Button());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			this->panel1->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// timer1
@@ -219,16 +224,31 @@ namespace TrabajoFinal {
 			this->button3->UseVisualStyleBackColor = false;
 			this->button3->Click += gcnew System::EventHandler(this, &selecPersonaje::button3_Click);
 			// 
-			// pictureBox1
+			// panel1
 			// 
-			this->pictureBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->pictureBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->pictureBox1->Location = System::Drawing::Point(-2, 0);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(821, 30);
-			this->pictureBox1->TabIndex = 14;
-			this->pictureBox1->TabStop = false;
+			this->panel1->Controls->Add(this->pictureBox2);
+			this->panel1->Location = System::Drawing::Point(0, -1);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(840, 30);
+			this->panel1->TabIndex = 15;
+			this->panel1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &selecPersonaje::panel1_MouseDown);
+			this->panel1->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &selecPersonaje::panel1_MouseMove);
+			this->panel1->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &selecPersonaje::panel1_MouseUp);
+			// 
+			// pictureBox2
+			// 
+			this->pictureBox2->BackColor = System::Drawing::Color::Transparent;
+			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
+			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox2->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->pictureBox2->Location = System::Drawing::Point(785, 0);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(36, 30);
+			this->pictureBox2->TabIndex = 7;
+			this->pictureBox2->TabStop = false;
+			this->pictureBox2->Click += gcnew System::EventHandler(this, &selecPersonaje::pictureBox2_Click);
 			// 
 			// selecPersonaje
 			// 
@@ -236,7 +256,7 @@ namespace TrabajoFinal {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackColor = System::Drawing::Color::White;
 			this->ClientSize = System::Drawing::Size(816, 477);
-			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->button3);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button2);
@@ -251,7 +271,8 @@ namespace TrabajoFinal {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Text = L"selecPersonaje";
 			this->Load += gcnew System::EventHandler(this, &selecPersonaje::selecPersonaje_Load);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			this->panel1->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -318,5 +339,19 @@ namespace TrabajoFinal {
 		}
 		this->Visible = true;
 	}
+private: System::Void panel1_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	activeMove = 1;
+	moveX = e->X; moveY = e->Y;
+}
+private: System::Void panel1_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	if (activeMove) this->SetDesktopLocation(MousePosition.X - moveX, MousePosition.Y - moveY);
+}
+private: System::Void panel1_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+	activeMove = 0;
+}
+private: System::Void pictureBox2_Click(System::Object^ sender, System::EventArgs^ e) {
+	DialogResult = System::Windows::Forms::DialogResult::Abort;
+	this->Close();
+}
 };
 }

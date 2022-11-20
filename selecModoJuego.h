@@ -45,6 +45,7 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::Label^ label2;
 	private: System::Windows::Forms::PictureBox^ imgSingleplayer;
 	private: System::Windows::Forms::PictureBox^ imgMultiplayer;
+	private: System::Windows::Forms::PictureBox^ pictureBox1;
 
 	private:
 		/// <summary>
@@ -65,8 +66,10 @@ namespace TrabajoFinal {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->imgSingleplayer = (gcnew System::Windows::Forms::PictureBox());
 			this->imgMultiplayer = (gcnew System::Windows::Forms::PictureBox());
+			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgSingleplayer))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMultiplayer))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// msgBienvenida
@@ -124,6 +127,18 @@ namespace TrabajoFinal {
 			this->imgMultiplayer->TabStop = false;
 			this->imgMultiplayer->Click += gcnew System::EventHandler(this, &selecModoJuego::imgMultiplayer_Click);
 			// 
+			// pictureBox1
+			// 
+			this->pictureBox1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.BackgroundImage")));
+			this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox1->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->pictureBox1->Location = System::Drawing::Point(836, 0);
+			this->pictureBox1->Name = L"pictureBox1";
+			this->pictureBox1->Size = System::Drawing::Size(37, 32);
+			this->pictureBox1->TabIndex = 5;
+			this->pictureBox1->TabStop = false;
+			this->pictureBox1->Click += gcnew System::EventHandler(this, &selecModoJuego::pictureBox1_Click);
+			// 
 			// selecModoJuego
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
@@ -131,6 +146,7 @@ namespace TrabajoFinal {
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(875, 393);
 			this->ControlBox = false;
+			this->Controls->Add(this->pictureBox1);
 			this->Controls->Add(this->imgMultiplayer);
 			this->Controls->Add(this->imgSingleplayer);
 			this->Controls->Add(this->label2);
@@ -141,11 +157,12 @@ namespace TrabajoFinal {
 			this->MaximizeBox = false;
 			this->MinimizeBox = false;
 			this->Name = L"selecModoJuego";
-			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
+			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->TopMost = true;
 			this->Load += gcnew System::EventHandler(this, &selecModoJuego::selecModoJuego_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgSingleplayer))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMultiplayer))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -179,6 +196,10 @@ private: System::Void imgMultiplayer_Click(System::Object^ sender, System::Event
 		return this->Close();
 	}
 	this->Visible = true;
+}
+private: System::Void pictureBox1_Click(System::Object^ sender, System::EventArgs^ e) {
+	DialogResult = System::Windows::Forms::DialogResult::Abort;
+	this->Close();
 }
 };
 }

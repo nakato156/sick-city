@@ -17,6 +17,8 @@ namespace TrabajoFinal {
 	{
 	private:
 		int activeMove, moveX, moveY;
+	private: System::Windows::Forms::Panel^ panel1;
+	private: System::Windows::Forms::PictureBox^ pictureBox2;
 	public:
 		Inicio(void)
 		{
@@ -27,7 +29,7 @@ namespace TrabajoFinal {
 			//
 		}
 	private: System::Windows::Forms::TextBox^ txtInputName;
-	private: System::Windows::Forms::PictureBox^ pictureBox1;
+
 	public:
 
 	protected:
@@ -58,10 +60,13 @@ namespace TrabajoFinal {
 		/// </summary>
 		void InitializeComponent(void)
 		{
+			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Inicio::typeid));
 			this->txtInputName = (gcnew System::Windows::Forms::TextBox());
 			this->label1 = (gcnew System::Windows::Forms::Label());
-			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
+			this->pictureBox2 = (gcnew System::Windows::Forms::PictureBox());
+			this->panel1 = (gcnew System::Windows::Forms::Panel());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->BeginInit();
+			this->panel1->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// txtInputName
@@ -87,27 +92,38 @@ namespace TrabajoFinal {
 			this->label1->TabIndex = 1;
 			this->label1->Text = L"Ingrese su nombre";
 			// 
-			// pictureBox1
+			// pictureBox2
 			// 
-			this->pictureBox1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
+			this->pictureBox2->BackColor = System::Drawing::Color::Transparent;
+			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
+			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+			this->pictureBox2->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->pictureBox2->Location = System::Drawing::Point(844, 0);
+			this->pictureBox2->Name = L"pictureBox2";
+			this->pictureBox2->Size = System::Drawing::Size(36, 30);
+			this->pictureBox2->TabIndex = 6;
+			this->pictureBox2->TabStop = false;
+			this->pictureBox2->Click += gcnew System::EventHandler(this, &Inicio::pictureBox2_Click);
+			// 
+			// panel1
+			// 
+			this->panel1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)),
 				static_cast<System::Int32>(static_cast<System::Byte>(64)));
-			this->pictureBox1->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
-			this->pictureBox1->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->pictureBox1->Location = System::Drawing::Point(-5, -1);
-			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(881, 30);
-			this->pictureBox1->TabIndex = 2;
-			this->pictureBox1->TabStop = false;
-			this->pictureBox1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Inicio::pictureBox1_MouseDown);
-			this->pictureBox1->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Inicio::pictureBox1_MouseMove);
-			this->pictureBox1->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &Inicio::pictureBox1_MouseUp);
+			this->panel1->Controls->Add(this->pictureBox2);
+			this->panel1->Location = System::Drawing::Point(-3, -2);
+			this->panel1->Name = L"panel1";
+			this->panel1->Size = System::Drawing::Size(895, 30);
+			this->panel1->TabIndex = 7;
+			this->panel1->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Inicio::panel1_MouseDown);
+			this->panel1->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &Inicio::panel1_MouseMove);
+			this->panel1->MouseUp += gcnew System::Windows::Forms::MouseEventHandler(this, &Inicio::panel1_MouseUp);
 			// 
 			// Inicio
 			// 
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Inherit;
 			this->BackColor = System::Drawing::Color::Black;
 			this->ClientSize = System::Drawing::Size(875, 393);
-			this->Controls->Add(this->pictureBox1);
+			this->Controls->Add(this->panel1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->txtInputName);
 			this->ForeColor = System::Drawing::Color::White;
@@ -118,7 +134,8 @@ namespace TrabajoFinal {
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
 			this->Load += gcnew System::EventHandler(this, &Inicio::Inicio_Load);
 			this->Paint += gcnew System::Windows::Forms::PaintEventHandler(this, &Inicio::Inicio_Paint_1);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox2))->EndInit();
+			this->panel1->ResumeLayout(false);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -171,7 +188,8 @@ private: System::Void textInputName_KeyPress(System::Object^ sender, System::Win
 				   System::String^ name = System::Convert::ToString(this->txtInputName->Text->Trim());
 				   selecModoJuego^ VModoJuego = gcnew TrabajoFinal::selecModoJuego(name);
 				   this->Visible = false;
-				   VModoJuego->Show();
+				   if (VModoJuego->ShowDialog() == System::Windows::Forms::DialogResult::Abort)
+					   this->Close();
 			   }
 		   }
 	   }
@@ -182,13 +200,22 @@ private: System::Void Inicio_Paint_1(System::Object^ sender, System::Windows::Fo
 private: System::Void Inicio_Load(System::Object^ sender, System::EventArgs^ e) {
 }
 private: System::Void pictureBox1_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+}
+private: System::Void pictureBox1_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+}
+private: System::Void pictureBox1_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+}
+private: System::Void pictureBox2_Click(System::Object^ sender, System::EventArgs^ e) {
+	this->Close();
+}
+private: System::Void panel1_MouseDown(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 	activeMove = 1;
 	moveX = e->X; moveY = e->Y;
 }
-private: System::Void pictureBox1_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+private: System::Void panel1_MouseMove(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 	if (activeMove) this->SetDesktopLocation(MousePosition.X - moveX, MousePosition.Y - moveY);
 }
-private: System::Void pictureBox1_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
+private: System::Void panel1_MouseUp(System::Object^ sender, System::Windows::Forms::MouseEventArgs^ e) {
 	activeMove = 0;
 }
 };
