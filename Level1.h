@@ -25,7 +25,7 @@ namespace TrabajoFinal {
 	public ref class Level1 : public System::Windows::Forms::Form
 	{
 	public:
-		bool GM, showForm, mostrarCP, CPVisible;
+		bool GM, GW,  showForm, mostrarCP, CPVisible;
 		int velCP;
 
 	private:
@@ -250,6 +250,7 @@ namespace TrabajoFinal {
 	}
 	private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) {
 		if (GM) return gameOver();
+		else if (GW) return gameWin();
 		else if (CPVisible) return;
 
 		Graphics^ canvaFormulario = this->CreateGraphics();
@@ -278,7 +279,8 @@ namespace TrabajoFinal {
 				}
 			}
 			if (!g_contagiado->getCantidad()) {
-				gameWin();
+				GW = true;
+				audio->Stop();
 				return;
 			}
 			lista_balas->actualizarSalida(buffer);
@@ -349,12 +351,11 @@ namespace TrabajoFinal {
 
 			if (this->imgWin->Location.Y <= -10) {
 				this->timer1->Enabled = false;
+				auto curados = g_contagiado->curados;
+				cronometro->fin();
+				auto tiempo = cronometro->getParseTime();
+				showScreenWinGame(this, gcnew ScreenWin(tiempo, curados), timer1);
 			}
-
-			auto curados = g_contagiado->curados;
-			cronometro->fin();
-			auto tiempo = cronometro->getParseTime();
-			showScreenWinGame(this, gcnew ScreenWin(tiempo, curados), timer1);
 		}
 		void gameOver() {
 			if (!this->imgMuerte->Visible) {

@@ -8523,15 +8523,12 @@
 </value>
   </data>
   <data name="pictureBox1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>399, 161</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="pictureBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
-    <value>2, 2, 2, 2</value>
+    <value>598, 248</value>
   </data>
   <data name="pictureBox1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>67, 32</value>
+    <value>100, 49</value>
   </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="pictureBox1.SizeMode" type="System.Windows.Forms.PictureBoxSizeMode, System.Windows.Forms">
     <value>StretchImage</value>
   </data>
@@ -8574,10 +8571,13 @@
 </value>
   </data>
   <data name="imgVidas.Location" type="System.Drawing.Point, System.Drawing">
-    <value>10, 24</value>
+    <value>15, 37</value>
+  </data>
+  <data name="imgVidas.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="imgVidas.Size" type="System.Drawing.Size, System.Drawing">
-    <value>74, 23</value>
+    <value>111, 35</value>
   </data>
   <data name="imgVidas.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -8595,10 +8595,13 @@
     <value>3</value>
   </data>
   <data name="imgMuerte.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 153</value>
+    <value>621, 235</value>
+  </data>
+  <data name="imgMuerte.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="imgMuerte.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 50</value>
+    <value>150, 77</value>
   </data>
   <data name="imgMuerte.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
@@ -8625,10 +8628,13 @@
     <value>NoControl</value>
   </data>
   <data name="btn_reanudar.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 92</value>
+    <value>88, 142</value>
+  </data>
+  <data name="btn_reanudar.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="btn_reanudar.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 32</value>
+    <value>135, 49</value>
   </data>
   <data name="btn_reanudar.TabIndex" type="System.Int32, mscorlib">
     <value>14</value>
@@ -8680,10 +8686,13 @@
 </value>
   </data>
   <data name="btn_mute.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 35</value>
+    <value>160, 54</value>
+  </data>
+  <data name="btn_mute.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="btn_mute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>33, 28</value>
+    <value>50, 43</value>
   </data>
   <data name="btn_mute.TabIndex" type="System.Int32, mscorlib">
     <value>13</value>
@@ -8729,10 +8738,13 @@
 </value>
   </data>
   <data name="btn_unmute.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 35</value>
+    <value>88, 54</value>
+  </data>
+  <data name="btn_unmute.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="btn_unmute.Size" type="System.Drawing.Size, System.Drawing">
-    <value>30, 28</value>
+    <value>45, 43</value>
   </data>
   <data name="btn_unmute.TabIndex" type="System.Int32, mscorlib">
     <value>12</value>
@@ -8753,10 +8765,13 @@
     <value>Popup</value>
   </data>
   <data name="btnBack.Location" type="System.Drawing.Point, System.Drawing">
-    <value>59, 134</value>
+    <value>88, 206</value>
+  </data>
+  <data name="btnBack.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="btnBack.Size" type="System.Drawing.Size, System.Drawing">
-    <value>90, 32</value>
+    <value>135, 49</value>
   </data>
   <data name="btnBack.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -8777,10 +8792,13 @@
     <value>3</value>
   </data>
   <data name="controlPanel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>317, -190</value>
+    <value>476, -292</value>
+  </data>
+  <data name="controlPanel.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="controlPanel.Size" type="System.Drawing.Size, System.Drawing">
-    <value>200, 190</value>
+    <value>300, 292</value>
   </data>
   <data name="controlPanel.TabIndex" type="System.Int32, mscorlib">
     <value>0</value>
@@ -8804,13 +8822,19 @@
     <value>104, 17</value>
   </metadata>
   <data name="imgWin.Location" type="System.Drawing.Point, System.Drawing">
-    <value>414, 209</value>
+    <value>621, 322</value>
+  </data>
+  <data name="imgWin.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="imgWin.Size" type="System.Drawing.Size, System.Drawing">
-    <value>100, 50</value>
+    <value>150, 77</value>
   </data>
   <data name="imgWin.TabIndex" type="System.Int32, mscorlib">
     <value>2</value>
+  </data>
+  <data name="imgWin.Visible" type="System.Boolean, mscorlib">
+    <value>False</value>
   </data>
   <data name="&gt;&gt;imgWin.Name" xml:space="preserve">
     <value>imgWin</value>
@@ -8828,7 +8852,7 @@
     <value>True</value>
   </metadata>
   <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
-    <value>6, 13</value>
+    <value>9, 20</value>
   </data>
   <data name="$this.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
@@ -17235,7 +17259,10 @@
     <value>Stretch</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>875, 393</value>
+    <value>1312, 605</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>4, 5, 4, 5</value>
   </data>
   <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
     <value>CenterScreen</value>
