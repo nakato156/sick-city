@@ -324,6 +324,19 @@ namespace TrabajoFinal {
 
 	private:
 		void gameWin() {
+			/*if (!this->imgWin->Visible) {
+				this->imgWin->Image = gcnew Bitmap("imgs/youWin.png");
+				this->imgWin->Visible = true;
+			}
+
+			auto punto = this->imgWin->Location;
+			this->imgWin->Location = Point(punto.X - 4, punto.Y - 4);
+			this->imgWin->Width += 12;
+			this->imgWin->Height += 12;
+
+			if (this->imgWin->Location.Y <= -10) {
+				this->timer1->Enabled = false;
+			}*/
 			auto curados = g_contagiado->curados;
 			cronometro->fin();
 			auto tiempo = cronometro->getParseTime();

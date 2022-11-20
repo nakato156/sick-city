@@ -127,9 +127,10 @@ namespace TrabajoFinal {
 			this->imgVidasP1->BackColor = System::Drawing::Color::Transparent;
 			this->imgVidasP1->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"imgVidasP1.BackgroundImage")));
 			this->imgVidasP1->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->imgVidasP1->Location = System::Drawing::Point(49, 31);
+			this->imgVidasP1->Location = System::Drawing::Point(74, 48);
+			this->imgVidasP1->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->imgVidasP1->Name = L"imgVidasP1";
-			this->imgVidasP1->Size = System::Drawing::Size(74, 23);
+			this->imgVidasP1->Size = System::Drawing::Size(111, 35);
 			this->imgVidasP1->TabIndex = 1;
 			this->imgVidasP1->TabStop = false;
 			// 
@@ -138,9 +139,10 @@ namespace TrabajoFinal {
 			this->imgVidasP2->BackColor = System::Drawing::Color::Transparent;
 			this->imgVidasP2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"imgVidasP2.BackgroundImage")));
 			this->imgVidasP2->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->imgVidasP2->Location = System::Drawing::Point(49, 74);
+			this->imgVidasP2->Location = System::Drawing::Point(74, 114);
+			this->imgVidasP2->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->imgVidasP2->Name = L"imgVidasP2";
-			this->imgVidasP2->Size = System::Drawing::Size(74, 23);
+			this->imgVidasP2->Size = System::Drawing::Size(111, 35);
 			this->imgVidasP2->TabIndex = 2;
 			this->imgVidasP2->TabStop = false;
 			// 
@@ -148,9 +150,10 @@ namespace TrabajoFinal {
 			// 
 			this->imgMuerte->BackColor = System::Drawing::Color::Transparent;
 			this->imgMuerte->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->imgMuerte->Location = System::Drawing::Point(379, 152);
+			this->imgMuerte->Location = System::Drawing::Point(568, 234);
+			this->imgMuerte->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->imgMuerte->Name = L"imgMuerte";
-			this->imgMuerte->Size = System::Drawing::Size(100, 50);
+			this->imgMuerte->Size = System::Drawing::Size(150, 77);
 			this->imgMuerte->TabIndex = 3;
 			this->imgMuerte->TabStop = false;
 			this->imgMuerte->Visible = false;
@@ -159,10 +162,9 @@ namespace TrabajoFinal {
 			// 
 			this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox1.Image")));
 			this->pictureBox1->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->pictureBox1->Location = System::Drawing::Point(396, 161);
-			this->pictureBox1->Margin = System::Windows::Forms::Padding(2);
+			this->pictureBox1->Location = System::Drawing::Point(594, 248);
 			this->pictureBox1->Name = L"pictureBox1";
-			this->pictureBox1->Size = System::Drawing::Size(67, 32);
+			this->pictureBox1->Size = System::Drawing::Size(100, 49);
 			this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
 			this->pictureBox1->TabIndex = 4;
 			this->pictureBox1->TabStop = false;
@@ -176,9 +178,10 @@ namespace TrabajoFinal {
 			this->controlPanel->Controls->Add(this->btn_unmute);
 			this->controlPanel->Controls->Add(this->btnBack);
 			this->controlPanel->ForeColor = System::Drawing::Color::White;
-			this->controlPanel->Location = System::Drawing::Point(317, -190);
+			this->controlPanel->Location = System::Drawing::Point(476, -292);
+			this->controlPanel->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->controlPanel->Name = L"controlPanel";
-			this->controlPanel->Size = System::Drawing::Size(200, 190);
+			this->controlPanel->Size = System::Drawing::Size(300, 292);
 			this->controlPanel->TabIndex = 5;
 			this->controlPanel->Visible = false;
 			// 
@@ -188,9 +191,10 @@ namespace TrabajoFinal {
 			this->btn_reanudar->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->btn_reanudar->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btn_reanudar->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->btn_reanudar->Location = System::Drawing::Point(59, 92);
+			this->btn_reanudar->Location = System::Drawing::Point(88, 142);
+			this->btn_reanudar->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btn_reanudar->Name = L"btn_reanudar";
-			this->btn_reanudar->Size = System::Drawing::Size(90, 32);
+			this->btn_reanudar->Size = System::Drawing::Size(135, 49);
 			this->btn_reanudar->TabIndex = 14;
 			this->btn_reanudar->Text = L"Reanudar";
 			this->btn_reanudar->UseVisualStyleBackColor = false;
@@ -202,9 +206,10 @@ namespace TrabajoFinal {
 			this->btn_mute->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btn_mute->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btn_mute.Image")));
 			this->btn_mute->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->btn_mute->Location = System::Drawing::Point(107, 35);
+			this->btn_mute->Location = System::Drawing::Point(160, 54);
+			this->btn_mute->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btn_mute->Name = L"btn_mute";
-			this->btn_mute->Size = System::Drawing::Size(33, 28);
+			this->btn_mute->Size = System::Drawing::Size(50, 43);
 			this->btn_mute->TabIndex = 13;
 			this->btn_mute->UseVisualStyleBackColor = true;
 			this->btn_mute->Click += gcnew System::EventHandler(this, &levelMultiplayer::btn_mute_Click);
@@ -215,9 +220,10 @@ namespace TrabajoFinal {
 			this->btn_unmute->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btn_unmute->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"btn_unmute.Image")));
 			this->btn_unmute->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->btn_unmute->Location = System::Drawing::Point(59, 35);
+			this->btn_unmute->Location = System::Drawing::Point(88, 54);
+			this->btn_unmute->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btn_unmute->Name = L"btn_unmute";
-			this->btn_unmute->Size = System::Drawing::Size(30, 28);
+			this->btn_unmute->Size = System::Drawing::Size(45, 43);
 			this->btn_unmute->TabIndex = 12;
 			this->btn_unmute->UseVisualStyleBackColor = true;
 			this->btn_unmute->Click += gcnew System::EventHandler(this, &levelMultiplayer::btn_unmute_Click);
@@ -228,9 +234,10 @@ namespace TrabajoFinal {
 			this->btnBack->Cursor = System::Windows::Forms::Cursors::Hand;
 			this->btnBack->FlatStyle = System::Windows::Forms::FlatStyle::Popup;
 			this->btnBack->ImeMode = System::Windows::Forms::ImeMode::NoControl;
-			this->btnBack->Location = System::Drawing::Point(59, 134);
+			this->btnBack->Location = System::Drawing::Point(88, 206);
+			this->btnBack->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->btnBack->Name = L"btnBack";
-			this->btnBack->Size = System::Drawing::Size(90, 32);
+			this->btnBack->Size = System::Drawing::Size(135, 49);
 			this->btnBack->TabIndex = 0;
 			this->btnBack->Text = L"Ir al menu";
 			this->btnBack->UseVisualStyleBackColor = false;
@@ -250,9 +257,10 @@ namespace TrabajoFinal {
 			this->pictureBox2->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBox2->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox2.BackgroundImage")));
 			this->pictureBox2->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox2->Location = System::Drawing::Point(5, 26);
+			this->pictureBox2->Location = System::Drawing::Point(8, 40);
+			this->pictureBox2->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->pictureBox2->Name = L"pictureBox2";
-			this->pictureBox2->Size = System::Drawing::Size(38, 32);
+			this->pictureBox2->Size = System::Drawing::Size(57, 49);
 			this->pictureBox2->TabIndex = 6;
 			this->pictureBox2->TabStop = false;
 			// 
@@ -261,19 +269,20 @@ namespace TrabajoFinal {
 			this->pictureBox3->BackColor = System::Drawing::Color::Transparent;
 			this->pictureBox3->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"pictureBox3.BackgroundImage")));
 			this->pictureBox3->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->pictureBox3->Location = System::Drawing::Point(5, 68);
+			this->pictureBox3->Location = System::Drawing::Point(8, 105);
+			this->pictureBox3->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->pictureBox3->Name = L"pictureBox3";
-			this->pictureBox3->Size = System::Drawing::Size(38, 32);
+			this->pictureBox3->Size = System::Drawing::Size(57, 49);
 			this->pictureBox3->TabIndex = 7;
 			this->pictureBox3->TabStop = false;
 			// 
 			// levelMultiplayer
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(859, 354);
+			this->ClientSize = System::Drawing::Size(1312, 605);
 			this->Controls->Add(this->pictureBox3);
 			this->Controls->Add(this->pictureBox2);
 			this->Controls->Add(this->imgMuerte);
@@ -284,6 +293,7 @@ namespace TrabajoFinal {
 			this->DoubleBuffered = true;
 			this->ForeColor = System::Drawing::Color::White;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+			this->Margin = System::Windows::Forms::Padding(4, 5, 4, 5);
 			this->Name = L"levelMultiplayer";
 			this->StartPosition = System::Windows::Forms::FormStartPosition::CenterParent;
 			this->Text = L"levelMultiplayer";
