@@ -53,6 +53,8 @@ namespace TrabajoFinal {
 	private: System::Windows::Forms::Button^ btn_reanudar;
 	private: System::Windows::Forms::Button^ btn_mute;
 	private: System::Windows::Forms::Button^ btn_unmute;
+	private: System::Windows::Forms::PictureBox^ imgWin;
+
 
 	private: System::Windows::Forms::PictureBox^ pictureBox1;
 	public:
@@ -106,10 +108,12 @@ namespace TrabajoFinal {
 			this->btn_unmute = (gcnew System::Windows::Forms::Button());
 			this->btnBack = (gcnew System::Windows::Forms::Button());
 			this->animaciones = (gcnew System::Windows::Forms::Timer(this->components));
+			this->imgWin = (gcnew System::Windows::Forms::PictureBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->BeginInit();
 			this->controlPanel->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgWin))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// timer1
@@ -185,10 +189,18 @@ namespace TrabajoFinal {
 			// 
 			this->animaciones->Tick += gcnew System::EventHandler(this, &Level1::animaciones_Tick);
 			// 
+			// imgWin
+			// 
+			this->imgWin->BackColor = System::Drawing::Color::Transparent;
+			resources->ApplyResources(this->imgWin, L"imgWin");
+			this->imgWin->Name = L"imgWin";
+			this->imgWin->TabStop = false;
+			// 
 			// Level1
 			// 
 			resources->ApplyResources(this, L"$this");
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->Controls->Add(this->imgWin);
 			this->Controls->Add(this->controlPanel);
 			this->Controls->Add(this->imgMuerte);
 			this->Controls->Add(this->imgVidas);
@@ -205,6 +217,7 @@ namespace TrabajoFinal {
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgVidas))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgMuerte))->EndInit();
 			this->controlPanel->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->imgWin))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -324,7 +337,7 @@ namespace TrabajoFinal {
 
 	private:
 		void gameWin() {
-			/*if (!this->imgWin->Visible) {
+			if (!this->imgWin->Visible) {
 				this->imgWin->Image = gcnew Bitmap("imgs/youWin.png");
 				this->imgWin->Visible = true;
 			}
@@ -336,7 +349,8 @@ namespace TrabajoFinal {
 
 			if (this->imgWin->Location.Y <= -10) {
 				this->timer1->Enabled = false;
-			}*/
+			}
+
 			auto curados = g_contagiado->curados;
 			cronometro->fin();
 			auto tiempo = cronometro->getParseTime();
